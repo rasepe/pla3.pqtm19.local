@@ -6,13 +6,27 @@
 </head>
 <body>
 
-<script type="text/javascript">
-//crear variable integre
-var x=3;
-//crear variable float
-var y=4.7;
-//crear variable string
-var cadena="hola mundo!";
-</script>
+<div id="msgBox" class="container">
+
+</div>
+
+	<script type="text/javascript">
+		//crear variable integer
+		var x = 3;
+		//crear variable float
+		var y = 4.7;
+		//crear variable string
+		var cadena = "hola mundo!";
+		
+		console.log(cadena);
+		
+		document.getElementById("msgBox").innerHTML=cadena;
+		
+		for(var i=0; i<10; i++) {
+			x++;
+			console.log(x);
+			document.getElementById("msgBox").innerHTML=x;
+		}
+	</script>
 </body>
 </html>
