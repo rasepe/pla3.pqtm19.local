@@ -16,7 +16,22 @@
 		//crear variable float
 		var y = 4.7;
 		//crear variable string
-		var cadena = "hola mundo!";
+		var cadena = '<select id="selSemana"></select>';
+		//crear variable booleana
+		var condicio=true;
+		//crear variable array
+		var semana = ["lun","mar","mie","jue","vie","sab","dom"];
+		console.log(semana);
+		//console.log(semana[1]);
+		//console.log(semana.length);
+		document.getElementById("msgBox").innerHTML=cadena;
+		for (var i=0; i<semana.length; i ++) {
+			console.log(semana[i]);
+			console.log(i);
+			debugger;
+			document.getElementById("selSemana").innerHTML+="<option>"+semana[i]+"</option>";
+		}
+		
 		
 		console.log(cadena);
 		
