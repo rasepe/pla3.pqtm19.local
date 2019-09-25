@@ -15,7 +15,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 
 
 
@@ -25,7 +25,15 @@
 		<button id="varXBtn">BOTO 2</button>
 
 		<div id="varXBox"></div>
+		<button id="btnDemo">BOTO 3</button>
+<p id="demo"></p>
+<button id="varZBtn">z4</button>
+<div id="varZBox"></div>
+<button id="userBtn">Botó llista</button>
+<div id="userBox"></div>
+
 	</div>
+	
 
 	<script>
 		var carName = "Volvo";
@@ -39,6 +47,31 @@
 			console.log(x);
 			document.getElementById("varXBox").innerHTML = x;
 		}
+		
+		var x3 = 5;
+		var y3 = 10;
+		document.getElementById("btnDemo").onclick=function(){
+		document.getElementById("demo").innerHTML = x3 + y3;
+		}
+		
+		
+		var x4 = 1;
+		var y4 = 1;
+		var z4 = x4+y4;
+		document.getElementById("varZBtn").onclick=function(){
+			alert(z4);
+		document.getElementById("varZBox").innerHTML=z4;
+		}
+		
+		
+		var firstName = "John", lastName = "Doe", age = 35;
+		document.getElementById("userBtn").onclick=function(){
+			var llista = "<ul><li>Nombre: " + firstName + "</li>"
+			llista += "<li>Apellido: " + lastName + "</li>"
+			llista += "<li>Edad: " + age + "</li></ul>"
+		document.getElementById("userBox").innerHTML=llista;
+		}
+		
 	</script>
 
 	<!-- Optional JavaScript -->
