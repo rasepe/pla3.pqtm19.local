@@ -48,8 +48,18 @@
 					</div>-->
 					</div>
 					<div class="form-group">
-						<label for="n1"> Número 2</label> <input class="form-control"
-							id="n2" type="text">
+						<label for="n1"> Número 2</label>
+							<div class="input-group">
+							<input id="n2" type="text" class="form-control"
+								placeholder="Numero2" aria-label="Valor2"
+								aria-describedby=" button-operacion-numero2">
+							<div class="input-group-append" id="button-operacion-numero2">
+								<button class="btn btn-outline-secondary" type="button"
+									id="button-suma-num2">+</button>
+								<button class="btn btn-outline-secondary" type="button"
+									id="button-resta-num2">-</button>
+							</div>
+						</div>
 						<!-- <div class="input-group">
 						<input id="n2" type="text" class="form-control" placeholder="Numero1" aria-label="Valor1" aria-describedby=" button-operacion-numero2">
 						<div class="input-group-append" id="button-operacion-numero2">
@@ -83,12 +93,57 @@
 		</div>
 	</div>
 	<script>
+	document.getElementById("button-suma-num1").onclick=function(){
+		document.getElementById("n1").value = parseFloat(document.getElementById("n1").value)+1
+	}
+	document.getElementById("button-resta-num1").onclick=function(){
+		document.getElementById("n1").value = parseFloat(document.getElementById("n1").value)-1
+	}
+	document.getElementById("button-suma-num2").onclick=function(){
+		document.getElementById("n2").value = parseFloat(document.getElementById("n2").value)+1
+	}
+	document.getElementById("button-resta-num2").onclick=function(){
+		document.getElementById("n2").value = parseFloat(document.getElementById("n2").value)-1
+	}
+	
+	
+//		var operador;
+	//	if (document.getElementById("suma").checked) {
+	//		operador = document.getElementById("suma").value;
+	//		} else if (document.getElementById("resta").checked) {
+	//			operador = document.getElementById("resta").value;
+	//		} else if (document.getElementById("multiplicacio").checked) {
+	///			operador = document.getElementById("multiplicacio").value;
+	//		} 
+	//	switch(document.getElementById("suma").checked.value) {
+	//	  case x:
+	//	    // code block
+	//	    break;
+	//	  case y:
+		    // code block
+	//	    break;
+	//	  default:
+		    // code block
+	//	}
+	
 	document.getElementById("calcular").onclick=function(){
-	//var Numero1 = document.getElementById.innerHTML("n1");
-	//var Numero2 = document.getElementById("n2");
-	var resultat = n1 + n2;
-	console.log(resultat);
-	document.getElementById("resultado").innerHTML = resultat;
+		
+	var Numero1 = parseFloat(document.getElementById("n1").value);
+	var Numero2 = parseFloat(document.getElementById("n2").value);
+	
+	var resultat;
+	if (document.getElementById("suma").checked) {
+	resultat = parseFloat(Numero1) + parseFloat(Numero2);
+		} else if (document.getElementById("resta").checked) {
+	resultat = parseFloat(Numero1) - parseFloat(Numero2);
+		} else if (document.getElementById("multiplicacio").checked) {
+	resultat = parseFloat(Numero1) * parseFloat(Numero2);
+		} else {
+	resultat = parseFloat(Numero1) / parseFloat(Numero2);
+		}
+		
+	
+	document.getElementById("resultado").value = resultat;
 	}
 	</script>
 	<!-- Optional JavaScript -->
