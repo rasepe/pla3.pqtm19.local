@@ -25,7 +25,7 @@
 			<div class="col-12">
 				<form class="form" action="#">
 					<div class="form-group">
-						<label for="n1"> Número 1</label> 
+						<label for="n1">Número 1</label>
 						<div class="input-group">
 							<input id="n1" type="text" class="form-control"
 								placeholder="Numero1" aria-label="Valor1"
@@ -37,26 +37,20 @@
 									id="button-resta-num1">-</button>
 							</div>
 						</div>
-						<!-- <input  class="form-control" id="n1" type="text">-->
-						<!--<div class="input-group "    >
-						
-						<input id="n1" type="text" class="form-control " placeholder="Numero1" aria-label="Valor1" aria-describedby=" button-operacion-numero1">
-						<div class="input-group-append" id="button-operacion-numero1">
-							<button class="btn btn-outline-secondary  btn-secondary text-white" type="button" id="button-suma-num1">+</button>
-							<button class="btn btn-outline-secondary  btn-secondary text-white" type="button" id="button-resta-num1">-</button>
-						</div>
-					</div>-->
 					</div>
 					<div class="form-group">
-						<label for="n1"> Número 2</label> <input class="form-control"
-							id="n2" type="text">
-						<!-- <div class="input-group">
-						<input id="n2" type="text" class="form-control" placeholder="Numero1" aria-label="Valor1" aria-describedby=" button-operacion-numero2">
-						<div class="input-group-append" id="button-operacion-numero2">
-							<button class="btn btn-outline-secondary btn-secondary text-white" type="button" id="button-suma-num2">+</button>
-							<button class="btn btn-outline-secondary btn-secondary text-white" type="button" id="button-resta-num2">-</button>
+						<label for="n2">Número 2</label>
+						<div class="input-group">
+							<input id="n2" type="text" class="form-control"
+								placeholder="Numero2" aria-label="Valor2"
+								aria-describedby=" button-operacion-numero2">
+							<div class="input-group-append" id="button-operacion-numero2">
+								<button class="btn btn-outline-secondary" type="button"
+									id="button-suma-num2">+</button>
+								<button class="btn btn-outline-secondary" type="button"
+									id="button-resta-num2">-</button>
+							</div>
 						</div>
-					</div>-->
 					</div>
 					<div class="form-group">
 						<input type="radio" name="operador" id="suma" value="+" checked><label
@@ -83,13 +77,43 @@
 		</div>
 	</div>
 	<script>
-	document.getElementById("calcular").onclick=function(){
-	//var Numero1 = document.getElementById.innerHTML("n1");
-	//var Numero2 = document.getElementById("n2");
-	var resultat = n1 + n2;
-	console.log(resultat);
-	document.getElementById("resultado").innerHTML = resultat;
-	}
+		document.getElementById("button-suma-num1").onclick = function() {
+			document.getElementById("n1").value++;
+		}
+		document.getElementById("button-resta-num1").onclick = function() {
+			document.getElementById("n1").value--;
+		}
+		document.getElementById("button-suma-num2").onclick = function() {
+			document.getElementById("n2").value++;
+		}
+		document.getElementById("button-resta-num2").onclick = function() {
+			document.getElementById("n2").value--;
+		}
+
+		document.getElementById("calcular").onclick = function() {
+			var Numero1 = parseFloat(document.getElementById("n1").value);
+			var Numero2 = parseFloat(document.getElementById("n2").value);
+			var resultat;
+			var operacio = document
+					.querySelector("input[name=operador]:checked").value;
+
+			switch (operacio) {
+			case "+":
+				resultat = Numero1 + Numero2;
+				break;
+			case "-":
+				resultat = Numero1 - Numero2;
+				break;
+			case "*":
+				resultat = Numero1 * Numero2;
+				break;
+			case "/":
+				resultat = Numero1 / Numero2;
+				break;
+			}
+			document.getElementById("resultado").value = resultat;
+
+		}
 	</script>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
