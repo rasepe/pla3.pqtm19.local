@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Strings</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s2.B: Strings</h1>
+</div>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <input type="button" class="btn btn-primary" id="btn1" value="Executar">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <label>Accions</label>
+   <ol>
+    <li>Utilitzeu la propietat de longitud per obtenir la longitud de txt1="Hello World!". Mostreu la longitud quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt1Box”:<span class="text-danger" id="txt1Box"></span></li>
+    <li>Utilitzeu els caracters d'escapament per escriure We are "Vikings". Mostreu el contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt2Box”:<span class="text-danger" id="txt2Box"></span></li>
+    <li>Concatenar  les dues cadenes per mostrar en una la cadena "Hello World!". Mostreu el contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt3Box”:<span class="text-danger" id="txt3Box"></span></li>
+    <li>Trobeu la posició del caràcter h a la cadena txt4. Mostreu la posició quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt4Box”:<span class="text-danger" id="txt4Box"></span></li>
+    <li>Utilitzeu el mètode slice per extreure  la paraula "bananes". Mostreu el contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt5Box”:<span class="text-danger" id="txt5Box"></span></li>
+    <li>Utilitzeu el mètode String correcte per reemplaçar la paraula "Hello" amb la paraula "Wellcome". Mostreu el resultat quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt6Box”:<span class="text-danger" id="txt6Box"></span></li>
+    <li>Converteix el valor del text en majúscula. Mostreu el resultat quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt7Box”: <span class="text-danger" id="txt7Box"></span></li>
+    <li>Converteix el valor del text en minúscules. Mostreu el resultat quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt8Box”:<span class="text-danger" id="txt8Box"></span></li>
+    <li>Utilitzeu el mètode concat () per crear una cadena que digui "Hello World!". Mostreu el resultat quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt9Box”: <span class="text-danger" id="txt9Box"></span></li>
+   </ol>
+  </div>
+ </div>
+		<script>
+			//Utilitzeu la propietat de longitud per obtenir la longitud de txt1=”Hello World!”.
+			//Mostreu la longitud quan es produeixi el esdeveniment de click sobre el boto “btn1”
+			//sobre una caixa amb el id=“txt1Box”.
+
+			var txt1 = "Hello World!";
+			var lengthTxt1 = txt1.length;
+			var txt2 = "We are \"Vikings\"";
+			var str31 = "Hello ";
+			var str32 = "World!";
+			var txt4 = "abcdefghijklm";
+			var pos = txt4.indexOf("h");
+			var txt5 = "I can eat bananas all day";
+			var x = txt5.slice(10,17);
+			var txt6 = "Hello World";
+			var txt7 = "Hello World";
+			var txt8 = "Hello World";
+			var str91 = "Hello ";
+			var str92 = "World!";
+			var result = str91.concat(str92);
+			document.getElementById("btn1").onclick = function() {
+				document.getElementById("txt1Box").innerHTML = lengthTxt1;
+				document.getElementById("txt2Box").innerHTML = txt2;
+				document.getElementById("txt3Box").innerHTML = str31 + str32;
+				document.getElementById("txt4Box").innerHTML = pos;
+				document.getElementById("txt5Box").innerHTML = x;
+				txt6 = txt6.replace("Hello", "Welcome");
+				document.getElementById("txt6Box").innerHTML = txt6;
+				txt7 = txt7.toUpperCase();
+				document.getElementById("txt7Box").innerHTML = txt7;
+				txt8 = txt8.toLowerCase();
+				document.getElementById("txt8Box").innerHTML = txt8;
+				document.getElementById("txt9Box").innerHTML = result;
+			}
+
+			//Utilitzeu els caracters d'escapament per escriure We are "Vikings". Mostreu el
+			//contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una
+			//caixa amb el id=“txt2Box”.
+			//Concatenar les dues cadenes per mostrar en una la cadena "Hello World!". Mostreu el
+			//contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una
+			//caixa amb el id=“txt3Box”.
+			
+			//Trobeu la posició del caràcter h a la cadena txt4. Mostreu la posició quan es produeixi
+//el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt4Box”.
+
+//Utilitzeu el mètode slice per extreure la paraula "bananes". Mostreu el contingut
+//quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb
+//el id=“txt5Box”.
+
+//Utilitzeu el mètode String correcte per reemplaçar la paraula "Hello" amb la paraula
+//"Welcome". Mostreu el resultat quan es produeixi el esdeveniment de click sobre el
+//boto “btn1” sobre una caixa amb el id=“txt6Box”.
+
+//Converteix el valor del text en majúscula. Mostreu el resultat quan es produeixi el
+//esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt7Box”.
+
+
+
+
+		</script>
+
+		<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

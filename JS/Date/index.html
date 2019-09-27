@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s2.C: Date</h1>
+</div>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <input type="button" class="btn btn-primary" id="btn1" value="Executar">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <label>Accions</label>
+   <ol>
+    <li>Creeu un objecte Date i mostreu la data i l'hora actuals. Mostreu el contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“date1Box”:<span class="text-danger" id="date1Box"></span></li>
+    <li>Utilitzeu el mètode Data correcte per establir l'any d'un objecte de date al 1 de Gener del  2020. Mostreu el contingut quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“date2Box”:<span class="text-danger" id="date2Box"></span></li>
+   </ol>
+  </div>
+ </div>
+</div>
+		<script>
+			
+
+
+/* Creeu un objecte Date i mostreu la data i l'hora actuals. Mostreu el contingut quan es
+produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el
+id=“date1Box” */
+
+			var date1 = new Date();
+			var date2 = new Date();
+			document.getElementById("btn1").onclick = function() {
+			console.log(date1);
+			document.getElementById("date1Box").innerHTML = date1;
+			date2.setFullYear(2020);
+			date2.setMonth(0);
+			date2.setDate(1);	
+			console.log(date2);
+			document.getElementById("date2Box").innerHTML = date2;
+			}
+			
+			/*Utilitzeu el mètode Data correcte per establir l'any d'un objecte de date al 1 de Gener
+			del 2020. Mostreu el contingut quan es produeixi el esdeveniment de click sobre el
+			boto “btn1” sobre una caixa amb el id=“date2Box”.*/
+			
+			
+	
+			
+		</script>
+
+		<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

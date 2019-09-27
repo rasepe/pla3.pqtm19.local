@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Arrays</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+	<h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s1.G: Arrays</h1>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		
+  <div class="col-12">
+			<label>Accions</label>
+			<ol>
+				<li>Obteniu el valor "Volvo" de la matriu de cotxes en una variable x. Mostreu el contingut de la matriu en la llista id=”llista1”, si el valor de la matriu de la llista és igual al valor de x aleshores emfatitzeu l’element de la llista amb un text en negreta</li>
+				<li>Canvieu el primer element dels cotxes a "Ford".. Mostreu el contingut de la matriu en la llista id=”llista2”</li>
+    <li>Mostra el nombre d'elements d'una matriu, utilitzant el mètode Array correcte. Mostreu el contingut de la matriu en la llista id=”llista3”</li>
+    <li>Utilitzeu el mètode Array correcte per eliminar l'últim element de la matriu de fruites. Mostreu el contingut de la matriu en la llista id=”llista4”</li>
+				<li>Utilitzeu el mètode Array correcte per afegir "Kiwi" al conjunt de fruites. Mostreu el contingut de la matriu en la llista id=”llista5”</li>
+    <li>Utilitzeu el mètode splice () per treure "Banana" i " Orange " de les fruites. Mostreu el contingut de la matriu en la llista id=”llista6</li>
+    <li>Utilitzeu el mètode concat () per concatenar girls i boys. Mostreu el contingut de la matriu children en la llista id=”llista7”</li>
+    <li>Utilitzeu el mètode Array correcte per ordenar alfabèticament la matriu de children. Mostreu el contingut de la matriu children en la llista id=”llista8”</li>
+			</ol>
+		</div>
+  <div class="col-12">
+			<form class="form" action="#">
+    <div class="form-group">
+					<input type="button" class="btn btn-primary" id="executar" value="Executar">
+				</div>
+   </form>
+  </div>
+ </div>
+ <div class="row">
+  <div class="col-3"><i class="border-bottom">Llista 1</i>
+   <ul class="list-group list-group-flush" id="llista1"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 2</i>
+   <ul class="list-group list-group-flush" id="llista2"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 3</i>
+   <ul class="list-group list-group-flush" id="llista3"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 4</i>
+   <ul class="list-group list-group-flush" id="llista4"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 5</i>
+   <ul class="list-group list-group-flush" id="llista5"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 6</i>
+   <ul class="list-group list-group-flush" id="llista6"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 7</i>
+   <ul class="list-group list-group-flush" id="llista7"></ul>
+  </div>
+  <div class="col-3"><i class="border-bottom">Llista 8</i>
+   <ul class="list-group list-group-flush" id="llista8"></ul>
+  </div>
+ </div>
+</div>
+<script>
+document.getElementById("executar").onclick = function() {
+	/*
+	Obteniu el valor "Volvo" de la matriu de cotxes en una variable x. Mostreu el contingut
+	de la matriu en la llista id=”llista1”, si el valor de la matriu de la llista és igual al valor de
+	x aleshores emfatitzeu l’element de la llista amb un text en negreta
+	*/
+	var cars1 = ["Saab", "Volvo", "BMW"];
+	var x = cars1[1];
+	console.log(x);
+	for(var i=0 ; i<cars1.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista1‛
+	if(cars1[i] != x){
+	// Crear un element de llista <li> dins del contenidor id=‛llista1‛
+		document.getElementById("llista1").innerHTML += "<li>" + cars1[i] + "</li>";
+	}else{
+	// Crear un element de llista <li> dins del contenidor id=‛llista1‛ però emfatitzat
+		document.getElementById("llista1").innerHTML += "<li><strong>" + cars1[i] + "</strong></li>";
+	}
+	}
+	//Canvieu el primer element dels cotxes a "Ford".. Mostreu el contingut de la matriu en
+	//la llista id=”llista2”
+	var cars2 = ["Volvo", "Jeep", "Mercedes"];
+	cars2[0] = "Ford";
+	console.log(cars2);
+	for(var i=0 ; i<cars2.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista2‛
+		document.getElementById("llista2").innerHTML += "<li>" + cars2[i] + "</li>";
+	}
+	//Mostra el nombre d'elements d'una matriu, utilitzant el mètode Array correcte.
+	//Mostreu el contingut de la matriu en la llista id=”llista3”
+	var cars3 = ["Volvo", "Jeep", "Mercedes"];
+	console.log(cars3.length);
+	for(var i=0 ; i<cars3.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista3‛
+		document.getElementById("llista3").innerHTML += "<li>" + cars3[i] + "</li>";
+	}
+	//Utilitzeu el mètode Array correcte per eliminar l'últim element de la matriu de fruites.
+	//Mostreu el contingut de la matriu en la llista id=”llista4”
+	var fruits = ["Banana", "Orange", "Apple"];
+	fruits.splice(fruits.length, 1);
+	console.log(fruits);
+	for(var i=0 ; i< fruits.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista4‛
+		document.getElementById("llista4").innerHTML += "<li>" + fruits[i] + "</li>";
+	}
+	//Utilitzeu el mètode Array correcte per afegir "Kiwi" al conjunt de fruites. Mostreu el
+	//contingut de la matriu en la llista id=”llista5”
+	var fruits = ["Banana", "Orange", "Apple"];
+	fruits.splice(fruits.length, 0, "Kiwi");
+	console.log(fruits);
+	for(var i=0 ; i< fruits.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista5‛
+		document.getElementById("llista5").innerHTML += "<li>" + fruits[i] + "</li>";
+	}
+	//Utilitzeu el mètode splice () per treure "Banana" i " Orange " de les fruites. Mostreu el
+	//contingut de la matriu en la llista id=”llista6”.
+	var fruits = ["Banana", "Orange", "Apple", "Kiwi"];
+	fruits.splice(0, 2);
+	console.log(fruits);
+	for(var i=0 ; i< fruits.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista6‛
+		document.getElementById("llista6").innerHTML += "<li>" + fruits[i] + "</li>";
+	}
+	//Utilitzeu el mètode concat () per concatenar girls i boys. Mostreu el contingut de la
+	//matriu children en la llista id=”llista7”
+	var girls = ["Cecilie", "Lone"];
+	var boys = ["Emil", "Tobias", "Linus"];
+	var children = girls.concat(boys); 
+	console.log(children);
+	for(var i=0 ; i< children.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista7‛
+		document.getElementById("llista7").innerHTML += "<li>" + children[i] + "</li>";
+	}
+	//Utilitzeu el mètode Array correcte per ordenar alfabèticament la matriu de children.
+	//Mostreu el contingut de la matriu children en la llista id=”llista8”
+	children.sort();
+	console.log(children);
+	for(var i=0 ; i< children.length; i++){
+	// Crear un element de llista <li> dins del contenidor id=‛llista8‛
+		document.getElementById("llista8").innerHTML += "<li>" + children[i] + "</li>";
+	}
+}
+
+</script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

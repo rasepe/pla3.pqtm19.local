@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bucles</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="jumbotron">
+		<h1>
+			<i class="fa fa-clipboard"></i> Exercici: PLA3_s1.F: Bucles
+		</h1>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<form class="form" action="#">
+					<div class="form-group">
+						<input type="button" class="btn btn-primary" id="executar"
+							value="Executar">
+					</div>
+				</form>
+			</div>
+			<div class="col-12">
+				<label>Accions</label>
+				<ol>
+					<li>Creeu un bucle que va de 0 a 9 i que vagi creant una
+						llista numerada dins de la llista &lt;ul> que porta per
+						id=”llista1”.</li>
+					<li>Creeu un bucle que s'executi a cada element de la matriu
+						de fruites. Per cada Fruita es crea un element de llista &lt;li>
+						dins de la llista &lt;ol> amb id=“llista2”.</li>
+					<li>Creeu un bucle que s'executi mentre es compleixi que i
+						sigui menor que 10. Per cada repetició del bucle s’ha d’afegir un
+						element a la llista id=”llista3” amb el número de cicle.</li>
+					<li>Creeu un bucle que s'executi sempre que “i” sigui menor
+						que 10, però que augmenti la variable “i” en 2 unitats a cada
+						reiteració. Per cada repetició del bucle s’ha d’afegir un element
+						a la llista id=”llista4” amb el número de cicle.</li>
+					<li>Feu que el bucle s'aturi quan “i” valgui 5. Per cada
+						repetició del bucle s’ha d’afegir un element a la llista
+						id=”llista5” amb el número de cicle.</li>
+					<li>Feu que el bucle passi a la següent iteració quan “i”
+						valgui 5. Per cada repetició del bucle s’ha d’afegir un element a
+						la llista id=”llista6” amb el número de cicle.</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2">
+				<i>Llista 1</i>
+				<ul class="list-group list-group-flush" id="llista1"></ul>
+			</div>
+			<div class="col-2">
+				<i>Llista 2</i>
+				<ol class="border" id="llista2"></ol>
+			</div>
+			<div class="col-2">
+				<i>Llista 3</i>
+				<ul class="list-group list-group-flush" id="llista3"></ul>
+			</div>
+			<div class="col-2">
+				<i>Llista 4</i>
+				<ul class="list-group list-group-flush" id="llista4"></ul>
+			</div>
+			<div class="col-2">
+				<i>Llista 5</i>
+				<ul class="list-group list-group-flush" id="llista5"></ul>
+			</div>
+			<div class="col-2">
+				<i>Llista 6</i>
+				<ul class="list-group list-group-flush" id="llista6"></ul>
+			</div>
+		</div>
+	</div>
+	<script>
+document.getElementById("executar").onclick = function() {
+	//Creeu un bucle que va de 0 a 9 i que vagi creant una llista numerada dins de la llista
+//<ul> que porta per id=”llista1”.
+var i;
+for (i = 0; i < 10; i++) {
+console.log(i);
+// Crear un element de llista <li> dins del contenidor id=‛llista1‛
+document.getElementById("llista1").innerHTML += "<li>" + i + "</li>";
+}
+//Creeu un bucle que s'executi a cada element de la matriu de fruites. Per cada Fruita es
+//crea un element de llista <li> dins de la llista <ol> amb id=“llista2”.
+var fruits = ["Apple", "Banana", "Orange"];
+for (x in fruits) {
+console.log(fruits[x]);
+// Crear un element de llista <li> dins del contenidor id=‛llista2‛
+document.getElementById("llista2").innerHTML += "<li>" + fruits[x] + "</li>";
+}
+//Creeu un bucle que s'executi mentre es compleixi que i sigui menor que 10. Per cada
+//repetició del bucle s’ha d’afegir un element a la llista id=”llista3” amb el número de
+//cicle.
+var i = 0;
+while (i < 10) {
+console.log(i);
+// Crear un element de llista <li> dins del contenidor id=‛llista3‛
+document.getElementById("llista3").innerHTML += "<li>" + i + "</li>";
+i++;
+}
+//Creeu un bucle que s'executi sempre que “i” sigui menor que 10, però que augmenti la
+//variable “i” en 2 unitats a cada reiteració. Per cada repetició del bucle s’ha d’afegir un
+//element a la llista id=”llista4” amb el número de cicle.
+var i = 0;
+while (i < 10) {
+console.log(i);
+// Crear un element de llista <li> dins del contenidor id=‛llista4‛
+document.getElementById("llista4").innerHTML += "<li>" + i + "</li>";
+i=i+2;
+}
+//Feu que el bucle s'aturi quan “i” valgui 5. Per cada repetició del bucle s’ha d’afegir un
+//element a la llista id=”llista5” amb el número de cicle.
+for (i = 0; i < 10; i++) {
+	console.log(i);
+	if (i == 5) {
+	break;
+	}
+	// Crear un element de llista <li> dins del contenidor id=‛llista5‛
+	document.getElementById("llista5").innerHTML += "<li>" + i + "</li>";
+	}
+for (i = 0; i < 10; i++) {
+	if (i == 5) {
+	continue;
+	}
+	// Crear un element de llista <li> dins del contenidor id=‛llista6‛
+	document.getElementById("llista6").innerHTML += "<li>" + i + "</li>";
+	console.log(i);
+	}
+}
+
+</script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Funcions</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s2.A: Funcions</h1>
+</div>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <input type="button" class="btn btn-primary" id="btn1" value="Executar">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <label>Accions</label>
+   <ol>
+    <li>Executeu la funció anomenada “funcio1” quan es produeixi el esdeveniment de click sobre el boto “btn1”.</li>
+    <li>
+     Creeu una funció anomenada "funcio2". Feu que la funció rebi un argument que sigui una cadena de text i que en retorni la mateixa cadena convertida a majúscules.
+    </li>
+    <li>
+     Feu que la funció anterior torni "Hola" dins d’un contenidor amb id=”demo” i que això succeeixi quan es produeix l’esdeveniment click sobre el boto amb id=”btn1”: <span class="text-danger" id="demo"></span>
+    </li>
+    <li>Feu que la funció que es defineix a continuació es mostri "Hola" en l'HTML intern d'un element amb la assignació de id=”caixa”. S’ha d’executar la funció quan es produeix l’esdeveniment de clic sobre el boto de id=”btn1”: <span class="text-warning"
+      id="caixa"></span></li>
+   </ol>
+  </div>
+ </div>
+</div>
+<script>
+	function funcio1() {
+		alert("Hello World!");
+	}
+	document.getElementById("btn1").onclick = function() {
+		funcio1();
+		funcio3();
+		funcio4 ("caixa", "Hola");
+	}
+	//Creeu una funció anomenada "funcio2". Feu que la funció rebi un argument que sigui
+//una cadena de text i que en retorni la mateixa cadena convertida a majúscules.
+	function funcio2(cadena) {
+	console.log(cadena);
+	return cadena.toUpperCase();
+	}
+	//Feu que la funció anterior torni "Hola" dins d’un contenidor amb id=”demo” i que això
+//succeeixi quan es produeix l’esdeveniment click sobre el boto amb id=”btn1”.
+	function funcio3() {
+		document.getElementById("demo").innerHTML = funcio2("Hola");
+		}
+	//Feu que la funció que es defineix a continuació es mostri "Hola" en l'HTML intern d'un
+//element amb la assignació de id=”caixa”. S’ha d’executar la funció quan es produeix
+//l’esdeveniment de clic sobre el boto de id=”btn1”
+	function funcio4 (strId, cadena ) {
+document.getElementById(strId).innerHTML= cadena;
+}
+
+
+</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
