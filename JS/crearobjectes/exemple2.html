@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="radio" name="formato" id="llista" value="ul" checked>
+	<label for="suma">Llista</label>
+	<br>
+	<input type="radio" name="formato" id="cadena" value="p">
+	<label for="resta">Text</label>
+	<br>
+	<button id="btn">Mostrar Alumne</button>
+	<div id="box"></div>
+	<script>
+		function student(name, sclass, rollno) {
+			this.name = name
+			this.sclass = sclass
+			this.rollno = rollno
+			this.studentDetails = function(format) {
+				if (format == 'ul') {
+					return "The name of the student is <ul><li>Name: "
+							+ this.name + "</li><li> Class : " + this.sclass
+							+ "</li> <li>Roll No.: " + this.rollno + "</li>";
+				} else if (format == 'p') {
+					return "The name of the student is <p>Name: " + this.name
+							+ "</p><p> Class : " + this.sclass
+							+ "</p> <p>Roll No.: " + this.rollno + "</p>";
+				} else {
+					return "The name of the student is , Name: " + this.name
+							+ " Class : " + this.sclass + ", Roll No.: "
+							+ this.rollno;
+				}
+			}
+		}
+		document.getElementById("btn").onclick = function() {
+			var objStudent = new student("Quim Aymerich", "s50", "Docent");
+			debugger;
+			var format = document.querySelector('input[name=formato]:checked').value;
+			console.log(format);
+			switch (format) {
+			case 'ul':
+				console.log(objStudent.studentDetails('ul'));
+				document.getElementById("box").innerHTML = objStudent
+						.studentDetails('ul');
+				break;
+			case 'p':
+				console.log(objStudent.studentDetails('p'));
+				document.getElementById("box").innerHTML = objStudent
+						.studentDetails('p');
+				break;
+			}
+		}
+	</script>
+</body>
+</html>

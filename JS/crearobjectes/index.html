@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="caixa"></div>
+<script>
+var objAlumne= {
+	nom: "Rafel",
+	edat: 42,
+	baixa : function(cadena) {
+		console.log(cadena);
+		console.log(this.nom);
+	}
+};
+
+var objAlumne2= {
+		nom: "Jose",
+		cognoms: "Perez",
+		edat: 33,
+		descripcio: function(idObj){
+			var obj = document.getElementById(idObj);
+			obj.innerHTML= "<ul>" +
+			"<li>Nom: " + this.nom + "</li>" +
+			"<li>Cognoms: " + this.cognoms + "</li>" +
+			"<li>Edat: " + this.edat + "</li>" +
+			"</ul>";
+		}
+}
+
+console.log(objAlumne);
+console.log(objAlumne.nom);
+objAlumne.baixa("donat de baixa:");
+
+objAlumne2.descripcio("caixa");
+</script>
+
+</body>
+</html>
