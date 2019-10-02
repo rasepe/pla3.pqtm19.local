@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="jumbotron">
- <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s3.A: Expresions Regulars</h1>
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s3.C: Expresions Regulars</h1>
 </div>
 <div class="container-fluid">
  <div class="row">
@@ -29,47 +29,25 @@
   <div class="col-12">
    <label>Accions</label>
    <ol>
-    <li>Validar que en la caixa input amb id=”n1” s’introdueix <strong>un número de 3 dígits sencers, el caràcter punt i 2 dígits decimals</strong>. Mostreu el resultat de la validació quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre
-     una caixa amb el id=“txt1Box”: <span class="" id="txt1Box"></span></li>
+    <li>Confeccionar una expressió regular que validi l'ingrés del nom d'un dia de la setmana, un espai i un nombre d'1 o 2 dígits. Mostreu el resultat de la validació quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt1Box”: <span class="" id="txt1Box"></span></li>
    </ol>
   </div>
   <div class="col-12">
    <form class="form" action="#">
     <div class="form-group">
-     <label for="n1">  Número 1</label>
+     <label for="n1">  Dato</label>
      <input class="form-control" id="n1" type="text">
     </div>
    </form>
-
   </div>
-
-  <div class="col-12">
-
-   <ol start="2">
-    <li> Sol·licitar l'ingrés de la coordenada d'un punt en la caixa input amb id=”n2”. El format a ingressar per teclat és: (999,999) . Els números poden tenir entre 1 i 3 dígits. Mostreu el resultat de la validació quan es produeixi el esdeveniment de click
-     sobre el boto “btn1” sobre una caixa amb el id=“txt2Box” <span class="" id="txt2Box"></span>
-
-    </li>
-   </ol>
-  </div>
-  <div class="col-12">
-   <form class="form" action="#">
-    <div class="form-group">
-     <label for="n2">  Número 2</label>
-     <input class="form-control" id="n2" type="text">
-    </div>
-   </form>
-  </div>
-  
-  
-  
  </div>
 </div>
 
 	<script>
+
 		document.getElementById("btn1").onclick = function() {
 			var cadena = document.getElementById("n1").value;
-			var patron = /^\d{3}\.\d{2}$/;
+			var patron = /^(dilluns|dimarts|dimecres|dijous|divendres|dissabte|diumenge)\s\d{1,2}$/;
 			if (patron.test(cadena)) {
 				document.getElementById("txt1Box").innerHTML = 'El valor es correcte';
 				document.getElementById("txt1Box").className="text-success";
@@ -77,17 +55,6 @@
 				document.getElementById("txt1Box").innerHTML = 'El valor no te el format correcte';
 				document.getElementById("txt1Box").className="text-danger";
 				
-			}
-			document.getElementById("txt2Box").className ="";
-			document.getElementById("txt2Box").innerHTML ="";
-			var cadena2 = document.getElementById("n2").value;
-			var patron = /^\d{1,3}\,\d{1,3}$/;
-			if (patron.test(cadena2)) {
-			document.getElementById("txt2Box").innerHTML = 'El format es correcte';
-			document.getElementById("txt2Box").className="text-success";
-			} else {
-			document.getElementById("txt2Box").innerHTML = 'La dada no te el format correcte';
-			document.getElementById("txt2Box").className="text-danger";
 			}
 		}
 		

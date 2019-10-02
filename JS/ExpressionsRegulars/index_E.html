@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PLA3_s3.E</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div class="jumbotron">
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s3.E: Expresions Regulars</h1>
+</div>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <input type="button" class="btn btn-primary" id="btn1" value="Executar">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <label>Accions</label>
+   <ol>
+    <li>Validar data: <span class="" id="txt1Box"></span></li>
+    <li>Validar email: <span class="" id="txt2Box"></span></li>
+    <li>Canviar caracters especials: <span class="" id="txt3Box"></span></li>
+    <li>Treure scripts: <span class="" id="txt4Box"></span></li>
+   </ol>
+  </div>
+   <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <label for="n1">Data</label>
+     <input class="form-control" id="n1" type="text">
+    </div>
+   </form>
+  </div> 
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <label for="n2">Email</label>
+     <input class="form-control" id="n2" type="text">
+    </div>
+   </form>
+  </div>
+   <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <label for="n3">Nom Cognom</label>
+     <input class="form-control" id="n3" type="text">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <label for="n4">Script</label>
+     <input class="form-control" id="n4" type="text">
+    </div>
+   </form>
+  </div>
+ </div>
+</div>
+
+	<script>
+	//Crear una expressió regular validi una data en format "XX / XX / XXXX", on "X" és un
+	//dígit. Proveu amb l'expressió: "Vaig néixer el 1982.04.05 a Donostia.".
+	
+	//Crear una expressió regular que validi una adreça de correu electrònic. Per simplificar,
+//els valors abans de la @ poden contenir qualsevol caràcter alfanumèric, i els caràcters .
+//i -, mentre que els valors de després la @ poden contenir caràcters alfanumèrics, i el
+//tipus de domini pot tenir una longitud de 2 o 3 caràcters.
+		document.getElementById("btn1").onclick = function() {
+		
+		
+			var cadena = document.getElementById("n1").value;
+			var patron = /(([0-2][0-9])|(3[01]))\/((0[1-9])|(1[0-2]))\/[12]\d{3}/;
+			if (patron.test(cadena)) {
+				document.getElementById("txt1Box").innerHTML = 'El valor es correcte';
+				document.getElementById("txt1Box").className="text-success";
+			} else {
+				document.getElementById("txt1Box").innerHTML = 'El valor no te el format correcte';
+				document.getElementById("txt1Box").className="text-danger";
+				
+			}
+		
+		
+			var cadena = document.getElementById("n2").value;
+			var patron = /^(\w|\.|\-){1,}\@(\w{1,})\.\w{2,3}$/;
+			if (patron.test(cadena)) {
+				document.getElementById("txt2Box").innerHTML = 'El valor es correcte';
+				document.getElementById("txt2Box").className="text-success";
+			} else {
+				document.getElementById("txt2Box").innerHTML = 'El valor no te el format correcte';
+				document.getElementById("txt2Box").className="text-danger";
+				
+			}
+			
+			var cadena = document.getElementById("n3").value;		
+			var separat = cadena.split (/\s/);
+			console.log(separat);
+			var novacadena = separat[1] + ", " + separat[0];
+			document.getElementById("txt3Box").innerHTML = novacadena;
+			
+		/*	var str = document.getElementById("n3").value;
+			var txt = str.replace(/\&/,"&amp;");
+			txt = str.replace(/\"/,'&quot;');
+			txt = str.replace(/\</,"&lt;");
+			txt = str.replace(/\>/,"\&\g" + "t" + "\;");
+			
+			  document.getElementById("txt3Box").innerHTML = txt;
+		
+			  
+			  Donats un nom i un cognom, crear l'expressió regulat necessària per mostrar-los en
+			  ordre invers i separats per una coma. Per exemple, la cadena "John Smith", convertir-
+			  la en "Smith, John".
+		
+			  Crear una expressió regular que elimini les etiquetes potencialment perilloses (<script>
+			  ... </ script>) i tot el seu contingut d'una cadena HTML.
+			  
+			  */
+			
+				var cadenaambscript = document.getElementById("n4").value;
+				var patronscript = /<script>(?<=<script>)(.*)(?=<\/script>)<\/script>/g;
+				
+						var cadenasensescript = cadenaambscript.replace(patron, " ");
+						document.getElementById("txt4Box").innerHTML = cadenasensescript;
+			  
+			
+		}
+		var hola = escapeHTML("hola <script>");
+		
+		function escapeHTML(text) {
+			var replacements = [["&", "&amp;"], ["\"", "&quot;"],
+			["<", "&lt;"], [">", "&gt;"]];
+			replacements.forEach(function(replace) {
+				text = text.replace(replace[0], replace[1]);
+			});
+			return text;
+		}
+		console.log(hola);
+		
+var hola2 = escapeHTML2("hola <script>\"&");
+		
+		function escapeHTML2(text) {
+			var replacements = [[/\&/, "&amp;"], [/\"/, "&quot;"],
+			[/\</, "&lt;"], [/\>/, "&gt;"]];
+			replacements.forEach(function(replace) {
+				text = text.replace(replace[0], replace[1]);
+			});
+			return text;
+		}
+		console.log(hola2);
+		
+		
+	</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
