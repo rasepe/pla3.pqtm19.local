@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PLA3_s3.A:Expressions regulars: quantificadors o repeticions {x} {x, y} {x,}</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+
+</head>
+<body>
+<div class="jumbotron">
+ <h1><i class="fa fa-clipboard"></i> Exercici: PLA3_s3.B: Expresions Regulars</h1>
+</div>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <input type="button" class="btn btn-primary" id="btn1" value="Executar">
+    </div>
+   </form>
+  </div>
+  <div class="col-12">
+   <label>Accions</label>
+   <ol>
+    <li>Validar si un string conté 4 nombres de 3 dígits cadascun separats per coma. Mostreu el resultat de la validació quan es produeixi el esdeveniment de click sobre el boto “btn1” sobre una caixa amb el id=“txt1Box”: <span class="" id="txt1Box"></span></li>
+   </ol>
+  </div>
+  <div class="col-12">
+   <form class="form" action="#">
+    <div class="form-group">
+     <label for="n1">  Dato 1</label>
+     <input class="form-control" id="n1" type="text">
+    </div>
+   </form>
+  </div>
+ </div>
+</div>
+
+	<script>
+
+		document.getElementById("btn1").onclick = function() {
+			var cadena = document.getElementById("n1").value;
+			var patron = /^(\d{3},){3}\d{3}$/;
+			if (patron.test(cadena)) {
+				document.getElementById("txt1Box").innerHTML = 'El valor es correcte';
+				document.getElementById("txt1Box").className="text-success";
+			} else {
+				document.getElementById("txt1Box").innerHTML = 'El valor no te el format correcte';
+				document.getElementById("txt1Box").className="text-danger";
+				
+			}
+		}
+		
+		
+	</script>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
