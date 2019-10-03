@@ -11,14 +11,39 @@
 
 <p><strong>Note:</strong> Text inside elements are considered to be text nodes, so we return the node value of the button element's first child (childNodes[0]).</p>
 
+
+
 <p id="demo"></p>
+
+<div id="pare">
+<p id="fill1">A</p>
+<p id="fill2">B</p>
+</div>
+
+<div id="replica">
+</div>
+
+<div id="replica2">
+</div>
 
 <script>
 function myFunction() {
   var c = document.getElementsByTagName("BUTTON")[0];
-  var x = c.childNodes[0].nodeValue;  //el primer childnode d'
+  console.log(c);
+  var x = c.childNodes[0].nodeValue;  //el valor del primer childnode és el innerHTML
+  console.log(x);
   document.getElementById("demo").innerHTML = x;
+  
+  var a = document.getElementById("pare").children;
+console.log(document.getElementById("pare").children[0]);
+console.log(document.getElementById("pare").children[0].innerHTML);
+  for (i=0; i<a.length; i++) {
+	  console.log(a[i]);
+	  document.getElementById("replica").innerHTML += a[i].childNodes[0];
+  }
 }
+  
+
 </script>
 
 </body>
