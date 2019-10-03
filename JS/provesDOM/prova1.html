@@ -23,8 +23,6 @@
 <div id="replica">
 </div>
 
-<div id="replica2">
-</div>
 
 <script>
 function myFunction() {
@@ -37,9 +35,10 @@ function myFunction() {
   var a = document.getElementById("pare").children;
 console.log(document.getElementById("pare").children[0]);
 console.log(document.getElementById("pare").children[0].innerHTML);
+console.log(document.getElementById("pare").children[0].outerHTML);
   for (i=0; i<a.length; i++) {
 	  console.log(a[i]);
-	  document.getElementById("replica").innerHTML += a[i].childNodes[0];
+	  document.getElementById("replica").innerHTML += a[i].outerHTML;
   }
 }
   
