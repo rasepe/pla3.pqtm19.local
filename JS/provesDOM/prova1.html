@@ -22,7 +22,11 @@
 
 <div id="replica">
 </div>
+<h1>outerHTML</h1>
 
+<p>Click the button to change the header from a h1 to a h3.</p>
+
+<button onclick="myFunction()">Change Header</button>
 
 <script>
 function myFunction() {
@@ -40,6 +44,8 @@ console.log(document.getElementById("pare").children[0].outerHTML);
 	  console.log(a[i]);
 	  document.getElementById("replica").innerHTML += a[i].outerHTML;
   }
+  var ix = document.getElementsByTagName("h1")[0];
+  ix.outerHTML = "<h3>You changed the entire header element and it's content!</h3>";
 }
   
 
