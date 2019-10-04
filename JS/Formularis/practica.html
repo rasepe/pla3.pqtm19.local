@@ -125,7 +125,89 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 	<script type="text/javascript">
-	
+	document.getElementById("registro_enviar").onclick=function(evt){
+		// capturar event i parar-lo
+		evt.preventDefault();
+		// var totOk control d'enviament
+		var totOk=true;
+		// --- netejar classes 'is-invalid' i 'is-valid'
+		this.form.querySelectorAll("*").forEach(function(item){
+			item.className=item.className.replace(/(is-valid|is-invalid)/g,'');
+		});
+		
+		// ---nombre ---
+		this.form.nombre.value = this.form.nombre.value.trim();
+		var string = this.form.nombre.value;
+		var pattern = /\d/;
+		if( pattern.test(string) || string==""){
+			this.form.nombre.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.nombre.className+=" is-valid";
+		}
+		
+		// ---apellido ---
+		this.form.apellido.value = this.form.apellido.value.trim();
+		var string2 = this.form.apellido.value;
+		var pattern2 = /\d/;
+		if( pattern2.test(string2) || string==""){
+			this.form.apellido.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.apellido.className+=" is-valid";
+		}
+		
+		// --- genero ----
+		if(this.form.genero.value==''){
+			this.form.genero.forEach(function(item){
+				item.className+=' is-invalid';
+			});
+			totOk=false;
+		} else {
+			this.form.genero.forEach(function(item){
+				item.className+=' is-valid';
+			});
+		}
+		//-----pais----
+		if (this.form.country.value=='') {
+			this.form.country.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.country.className+=" is-valid";
+		}
+		//---email---
+		this.form.email.value = this.form.email.value.trim();
+		var string3 = this.form.email.value;
+		var pattern3 = /(\w|\.|\-){1,}\@(\w{1,})\.\w{2,3}/;
+		if(this.form.email.value=='' || (pattern3.test(string3)==false)){
+			this.form.email.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.email.className+=" is-valid";
+		}
+		//----language----
+		if (this.form.elements["language[]"].selectedIndex == -1) {
+			this.form.elements["language[]"].className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.elements["language[]"].className+=" is-valid";
+		}
+		//----checkbox---
+		
+	if (! this.form.condiciones.checked) {
+		this.form.condiciones.className+=" is-invalid";
+		totOk= false;
+	} else {
+		this.form.condiciones.className+=" is-valid";
+	}
+		
+	//	if(error){totOk=false};
+		
+		if(totOk==true){
+			this.form.submit(); //Disparar l'event submit del form al que pertany el button (this.form)
+			// o be enviar les dades via AJAX
+		}
+	}
 	</script>
 </body>
 </html>
