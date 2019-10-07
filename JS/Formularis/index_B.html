@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Practica B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/register.css" /> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+      <!-- #Content -->
+      <div id="content"> 
+         <form action="#" method="get" onsubmit="">
+          <fieldset>
+            <legend>Datos personales</legend>
+            <div class="personal-flex-box">
+              <div class="flex-item">
+                <div class="field-label">Nombre</div>
+                <input class="" type="text" name="nombre" value=""/>
+              </div>
+              <div class="flex-item flex-grow-2" >
+                <div class="field-label">Apellidos</div>
+                <input type="text" name="apellidos"/>
+              </div>
+              <div class="flex-item">
+                <div class="field-label">Fecha naciemineto</div>
+                <input type="text" name="fnacimeinto"  placeholder="dd/mm/yyyy"/>
+              </div>
+              <div class="flex-item" >
+                <div class="field-label">Genero</div>
+                <div class="radio-flex-box">
+                  <span><input type="radio" name="genero" value="male" /> Hombre</span>
+                  <span><input type="radio" name="genero" value="female" /> Mujer</span>
+                  <span><input type="radio" name="genero" value="other" /> Otros</span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Datos de contacto</legend>
+            <div class="contacto-flex-box">
+              <div class="flex-item">
+                <div class="field-label">Email</div>
+                <input type="text" name="email" />
+              </div>
+              <div class="flex-item">
+                <div class="field-label">Telefono</div>
+                <input type="text" name="telefono" />
+              </div>
+              <div class="flex-item flex-grow-2" >
+                <div class="field-label">Pagina personal</div>
+                <input type="text" name="ppersonal" />
+              </div>
+            </div>
+              
+          </fieldset>
+          <fieldset>
+            <legend>Conocimientos</legend>
+            <div class="conocimientos-flex-box">
+              <div class="flex-item flex-grow-2" >
+                <div class="field-label">Lenguajes</div>
+                <select multiple id="lista" name="lista" size="7">
+                  <option value="Php">Php</option>
+                  <option value="Phyton">Phyton</option>
+                  <option value="Java">Java</option>
+                  <option value="Jquery">JQuery</option>
+                  <option value="net">.NET</option>
+                </select>
+              </div>
+              <div class="flex-item" >
+                <div class="controls-flex-box">
+                  <button type="button" value=">"  onclick="seleccion(this);" >&gt;</button>
+                  <button type="button" value=">>" onclick="seleccion(this);" >&gt;&gt;</button>
+                  <button type="button" value="<"  onclick="seleccion(this,document.getElementById('lista')[document.getElementById('lista').selectedIndex].value)"  >&lt;</button>
+                  <button type="button" value="<<" onclick="seleccion(this,document.getElementById('lista')[document.getElementById('lista').selectedIndex].value)" >&lt;&lt;</button>
+                </div>
+               
+              </div>
+              <div class="flex-item flex-grow-2" >
+                <div class="field-label">Lenguajes</div>
+                <select multiple id="programacion" name="programacion" size="7"></select>
+              </div>
+            </div>
+              
+          </fieldset>
+          <fieldset>
+            <div class="submit-flex-box">
+              <div class="flex-item">
+                <input type="submit" value="Enviar datos" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <script>
+      function seleccion(boto){
+  console.log(boto.value);
+  console.log(document.getElementById('lista')[document.getElementById('lista').selectedIndex].value);
+  console.log($('#lista').val())
+ var cadena = document.getElementById('lista')[document.getElementById('lista').selectedIndex].value;
+  var opcions = $('#lista').val();
+if (boto.value == ">") {
+	for (var i=0; i<opcions.length; i++) {
+	document.getElementById("programacion").innerHTML += "<option value=\""+opcions[i]+"\">"+opcions[i]+"</option>";
+	for (var j=0; j<document.getElementById('lista').options.length; j++) {
+		console.log(document.getElementById("lista").options[j].value)
+	if (document.getElementById("lista").options[j].value == opcions[i]) {
+		document.getElementById("lista").options[j].remove();
+	}
+	}
+	}
+} else if (boto.value == ">>") {
+	for (var k=0; k<document.getElementById('lista').options.length; k++) {
+		document.getElementById("programacion").innerHTML += "<option value=\""+document.getElementById('lista').options[k].value+"\">"+document.getElementById('lista').options[k].value+"</option>";
+		document.getElementById("lista").options[k].remove();
+	}
+//	console.log("llargada" + document.getElementById('lista').options.length);
+//	for (var k=0; k<document.getElementById('lista').options.length; k++) {
+		
+//		console.log("esborrem" + document.getElementById("lista").options[k].value)
+//		document.getElementById("lista").options[k].remove();
+//	}
+	
+	
+}
+
+
+      }
+      </script>
+  </body>
+</html>

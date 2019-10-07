@@ -13,7 +13,7 @@
 	<form action="servidor.php" method="post" id="registro">
 	  <fieldset class="border p-2 rounded position-relative">
 	  	<div style="top:20px;right:10px;" class="text-danger small position-absolute">* Campo obligatorio</div>
-		<legend class="w-auto px-3 ">Registro</legend>
+		<legend class="w-auto p-3">Registro</legend>
 		
 		<div class="form-row">
 			<div class="col-lg-4 col-md-6 mb-4 position-relative">
@@ -178,13 +178,28 @@
 		//---email---
 		this.form.email.value = this.form.email.value.trim();
 		var string3 = this.form.email.value;
-		var pattern3 = /(\w|\.|\-){1,}\@(\w{1,})\.\w{2,3}/;
+		var pattern3 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		if(this.form.email.value=='' || (pattern3.test(string3)==false)){
 			this.form.email.className+=" is-invalid";
 			totOk= false;
 		} else {
 			this.form.email.className+=" is-valid";
 		}
+		
+		// ------------------------- Password -----------------------------------
+		var passwordString=this.form.password.value;
+
+		var passwordPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/g; // Format Password
+
+		if( !passwordPattern.test(passwordString) || passwordString=="" ){
+		// ------------- Afegim la class 'is-invalid' a l'element
+		this.form.password.className+=" is-invalid ";
+		totOk=false;
+		}else{
+		// ------------- Afegim la class 'is-valid' a l'element ---------------
+		this.form.password.className+=" is-valid ";
+		}
+		
 		//----language----
 		if (this.form.elements["language[]"].selectedIndex == -1) {
 			this.form.elements["language[]"].className+=" is-invalid";
@@ -192,6 +207,17 @@
 		} else {
 			this.form.elements["language[]"].className+=" is-valid";
 		}
+		
+		// ------------------------ Comentarios ---------------------------------
+		if(this.form.comentarios.value=="" ||this.form.comentarios.value.length>120 ){
+		// ------------- Afegim la class 'is-invalid' a l'element
+		this.form.comentarios.className+=" is-invalid ";
+		totOk=false;
+		}else{
+		// ------------- Afegim la class 'is-valid' a l'element ---------------
+		this.form.comentarios.className+=" is-valid ";
+		}
+		
 		//----checkbox---
 		
 	if (! this.form.condiciones.checked) {

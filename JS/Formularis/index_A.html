@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>Formulario de Registro</title>
+
+<style type="text/css">
+body {
+	font-family: arial, helvetica;
+}
+
+form {
+	/*width: 600px;*/
+	margin: 20px auto 0 auto;
+}
+
+label {
+	float: left;
+	/*width: 200px;*/
+	font-weight: bold;
+}
+
+label[for="registro_condiciones"] {
+	float: none;
+}
+
+input[type="text"], input[type="password"], textarea {
+	/*width: 360px;*/
+}
+
+input[type="checkbox"] {
+	/*margin-left: 200px;*/
+}
+
+input[type="submit"] {
+	/*margin: 20px 0 0 200px;*/
+	display: block;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<form action="servidor.php" method="post" id="registro">
+			<fieldset class="border p-3 rounded position-relative">
+				<div style="top: 20px; right: 10px;"
+					class="text-danger small position-absolute">* Campo
+					obligatorio</div>
+				<legend class="w-auto px-3 ">Registro</legend>
+				
+				<div class="form-row">
+							<div class="col-lg-5 offset-lg-1 col-md-5 offset md-1 mb-4 position-relative">
+				<label for="registro_nombre" >Nombre:</label> 
+				<input type="text"
+					name="nombre" id="registro_nombre" class="form-control"> 
+					<div class="invalid-feedback position-absolute">
+					Por favor introduzca su nombre sin números.
+				</div>
+					</div>
+					<div class="col-lg-5  col-md-5 mb-4 position-relative">
+					<label
+					for="registro_apellidos">Apellido:</label> <input type="text"
+					name="apellido" id="registro_apellido" class="form-control"> 
+					 <div class="invalid-feedback position-absolute">
+					Por favor introduzca su apellido sin números.
+				</div>  
+					</div>
+					<div class="col-lg-5 offset-lg-1 col-md-5 offset md-1 mb-4 position-relative">
+					<label
+					for="registro_email">Email:</label> <input type="text" name="email"
+					id="registro_email" class="form-control"> 
+					<div class="invalid-feedback position-absolute">
+					Por favor introduzca su dirección de correo con un formato válido.
+				</div>
+					</div>
+					<div class="col-lg-5 col-md-5 mb-4 position-relative">
+					<label for="registro_password">Password:</label>
+				<input type="password" name="password" id="registro_password" class="form-control">
+					<div class="invalid-feedback position-absolute">
+					La constraseña no tiene un formato válido.
+				</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1 col-md-5 offset md-1 mb-4 position-relative">
+				<label for="registro_comentarios">Comentarios:</label>
+				<textarea name="comentarios" id="registro_comentarios" rows="10" class="form-control"></textarea>
+				<div class="invalid-feedback position-absolute">
+					Se requiere un comentario que no sea más largo de 50 caracteres.
+				</div>
+				</div>
+				</div>
+					<div class="form-group">
+					
+			<div class="form-check offset-lg-1 offset md-1 mt-4">
+					<input class="form-check-input " name="condiciones" type="checkbox" value="1" id="registro_condiciones" >
+					
+					<label class="form-check-label " for="registro_condiciones">Acepto
+					las condiciones del servicio.</label> 
+					<div class="invalid-feedback">
+					Se requiere aceptar las condiciones del servicio.
+				</div>
+				</div>
+			</div>
+					<!--  <input type="submit" value="Enviar">  -->
+					<button class="btn btn-primary offset-lg-1 offset md-1" id="registro_enviar" type="submit">Enviar</button>
+					
+			
+			</fieldset>
+		
+		</form>
+	</div>
+<!-- -	<script type="text/javascript" src="js/validador.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>  -->
+	<script type="text/javascript">
+	
+	document.getElementById("registro_nombre").onblur=function(){
+		this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+		this.value=this.value.trim();
+		var nombreString=this.value;
+		var nombrePattern=/\d/g;
+		if( nombrePattern.test(nombreString) || nombreString=="" ){
+		this.className+=" is-invalid ";
+		}else{
+		this.className+=" is-valid ";
+		}
+		};
+		
+		document.getElementById("registro_nombre").onblur=function(){
+			this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+			this.value=this.value.trim();
+			var nombreString=this.value;
+			var nombrePattern=/\d/g;
+			if( nombrePattern.test(nombreString) || nombreString=="" ){
+			this.className+=" is-invalid ";
+			}else{
+			this.className+=" is-valid ";
+			}
+			};
+		
+			document.getElementById("registro_apellido").onblur=function(){
+				this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+				this.value=this.value.trim();
+				var apellidoString=this.value;
+				var apellidoPattern=/\d/g;
+				if( apellidoPattern.test(apellidoString) || apellidoString=="" ){
+				this.className+=" is-invalid ";
+				}else{
+				this.className+=" is-valid ";
+				}
+				};
+	
+				document.getElementById("registro_email").onblur=function(){
+					this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+					this.value=this.value.trim();
+					var emailString=this.value;
+					var emailPattern=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+					if( emailPattern.test(emailString)==false || emailString=="" ){
+					this.className+=" is-invalid ";
+					}else{
+					this.className+=" is-valid ";
+					}
+					};
+					
+					document.getElementById("registro_password").onblur=function(){
+						this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+						this.value=this.value.trim();
+						var passwordString=this.value;
+						var passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+						if( passwordPattern.test(passwordString)==false || passwordString=="" ){
+						this.className+=" is-invalid ";
+						}else{
+						this.className+=" is-valid ";
+						}
+						};
+						
+						
+						document.getElementById("registro_comentarios").onblur=function(){
+							this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+							this.value=this.value.trim();
+							var comentariosString=this.value;
+							
+							if(comentariosString=="" || comentariosString.length>50 ){
+							this.className+=" is-invalid ";
+							}else{
+							this.className+=" is-valid ";
+							}
+							};
+							
+							document.getElementById("registro_condiciones").onblur=function(){
+								this.className=this.className.replace(/(is-valid|is-invalid)/g,'');
+								
+								if (! this.checked) {
+									this.className+=" is-invalid";
+									totOk= false;
+								} else {
+									this.className+=" is-valid";
+								}
+								};
+				
+	document.getElementById("registro_enviar").onclick=function(evt){
+		// capturar event i parar-lo
+		evt.preventDefault();
+		// var totOk control d'enviament
+		var totOk=true;
+		// --- netejar classes 'is-invalid' i 'is-valid'
+		this.form.querySelectorAll("*").forEach(function(item){
+			item.className=item.className.replace(/(is-valid|is-invalid)/g,'');
+		});
+		
+		// ---nombre ---
+		this.form.nombre.value = this.form.nombre.value.trim();
+		var string = this.form.nombre.value;
+		var pattern = /\d/g;
+		if( pattern.test(string) || string=="" ){
+			this.form.nombre.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.nombre.className+=" is-valid";
+		}
+		
+		// ---apellido ---
+		this.form.apellido.value = this.form.apellido.value.trim();
+		var string2 = this.form.apellido.value;
+		var pattern2 = /\d/g;
+		if( pattern2.test(string2) || string=="" ){
+			this.form.apellido.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.apellido.className+=" is-valid";
+		}
+		
+		//---email---
+		this.form.email.value = this.form.email.value.trim();
+		var string3 = this.form.email.value;
+		var pattern3 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(this.form.email.value=='' || (pattern3.test(string3)==false)){
+			this.form.email.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.email.className+=" is-valid";
+		}
+		
+		
+		// ------------------------- Password -----------------------------------
+		var passwordString=this.form.password.value;
+
+		var passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/g; // Format Password
+
+		if( !passwordPattern.test(passwordString) ){
+		// ------------- Afegim la class 'is-invalid' a l'element
+		this.form.password.className+=" is-invalid ";
+		totOk=false;
+		}else{
+		// ------------- Afegim la class 'is-valid' a l'element ---------------
+		this.form.password.className+=" is-valid ";
+		}
+		
+		
+		
+		// ------------------------ Comentarios ---------------------------------
+		if(this.form.comentarios.value=="" ||this.form.comentarios.value.length>50 ){
+		// ------------- Afegim la class 'is-invalid' a l'element
+		this.form.comentarios.className+=" is-invalid ";
+		totOk=false;
+		}else{
+		// ------------- Afegim la class 'is-valid' a l'element ---------------
+		this.form.comentarios.className+=" is-valid ";
+		}
+		
+		
+		//----checkbox---
+		if (! this.form.condiciones.checked) {
+			this.form.condiciones.className+=" is-invalid";
+			totOk= false;
+		} else {
+			this.form.condiciones.className+=" is-valid";
+		}
+		
+		
+		if(totOk==true){
+			this.form.submit(); //Disparar l'event submit del form al que pertany el button (this.form)
+			// o be enviar les dades via AJAX
+		}
+		
+	}
+		</script>
+</body>
+</html>
