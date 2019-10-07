@@ -1,132 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Practica B</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/register.css" /> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-      <!-- #Content -->
-      <div id="content"> 
-         <form action="#" method="get" onsubmit="">
-          <fieldset>
-            <legend>Datos personales</legend>
-            <div class="personal-flex-box">
-              <div class="flex-item">
-                <div class="field-label">Nombre</div>
-                <input class="" type="text" name="nombre" value=""/>
-              </div>
-              <div class="flex-item flex-grow-2" >
-                <div class="field-label">Apellidos</div>
-                <input type="text" name="apellidos"/>
-              </div>
-              <div class="flex-item">
-                <div class="field-label">Fecha naciemineto</div>
-                <input type="text" name="fnacimeinto"  placeholder="dd/mm/yyyy"/>
-              </div>
-              <div class="flex-item" >
-                <div class="field-label">Genero</div>
-                <div class="radio-flex-box">
-                  <span><input type="radio" name="genero" value="male" /> Hombre</span>
-                  <span><input type="radio" name="genero" value="female" /> Mujer</span>
-                  <span><input type="radio" name="genero" value="other" /> Otros</span>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Datos de contacto</legend>
-            <div class="contacto-flex-box">
-              <div class="flex-item">
-                <div class="field-label">Email</div>
-                <input type="text" name="email" />
-              </div>
-              <div class="flex-item">
-                <div class="field-label">Telefono</div>
-                <input type="text" name="telefono" />
-              </div>
-              <div class="flex-item flex-grow-2" >
-                <div class="field-label">Pagina personal</div>
-                <input type="text" name="ppersonal" />
-              </div>
-            </div>
-              
-          </fieldset>
-          <fieldset>
-            <legend>Conocimientos</legend>
-            <div class="conocimientos-flex-box">
-              <div class="flex-item flex-grow-2" >
-                <div class="field-label">Lenguajes</div>
-                <select multiple id="lista" name="lista" size="7">
-                  <option value="Php">Php</option>
-                  <option value="Phyton">Phyton</option>
-                  <option value="Java">Java</option>
-                  <option value="Jquery">JQuery</option>
-                  <option value="net">.NET</option>
-                </select>
-              </div>
-              <div class="flex-item" >
-                <div class="controls-flex-box">
-                  <button type="button" value=">"  onclick="seleccion(this);" >&gt;</button>
-                  <button type="button" value=">>" onclick="seleccion(this);" >&gt;&gt;</button>
-                  <button type="button" value="<"  onclick="seleccion(this,document.getElementById('lista')[document.getElementById('lista').selectedIndex].value)"  >&lt;</button>
-                  <button type="button" value="<<" onclick="seleccion(this,document.getElementById('lista')[document.getElementById('lista').selectedIndex].value)" >&lt;&lt;</button>
-                </div>
-               
-              </div>
-              <div class="flex-item flex-grow-2" >
-                <div class="field-label">Lenguajes</div>
-                <select multiple id="programacion" name="programacion" size="7"></select>
-              </div>
-            </div>
-              
-          </fieldset>
-          <fieldset>
-            <div class="submit-flex-box">
-              <div class="flex-item">
-                <input type="submit" value="Enviar datos" />
-              </div>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-      <script>
-      function seleccion(boto){
-  console.log(boto.value);
-  console.log(document.getElementById('lista')[document.getElementById('lista').selectedIndex].value);
-  console.log($('#lista').val())
- var cadena = document.getElementById('lista')[document.getElementById('lista').selectedIndex].value;
-  var opcions = $('#lista').val();
-if (boto.value == ">") {
-	for (var i=0; i<opcions.length; i++) {
-	document.getElementById("programacion").innerHTML += "<option value=\""+opcions[i]+"\">"+opcions[i]+"</option>";
-	for (var j=0; j<document.getElementById('lista').options.length; j++) {
-		console.log(document.getElementById("lista").options[j].value)
-	if (document.getElementById("lista").options[j].value == opcions[i]) {
-		document.getElementById("lista").options[j].remove();
-	}
-	}
-	}
-} else if (boto.value == ">>") {
-	for (var k=0; k<document.getElementById('lista').options.length; k++) {
-		document.getElementById("programacion").innerHTML += "<option value=\""+document.getElementById('lista').options[k].value+"\">"+document.getElementById('lista').options[k].value+"</option>";
-		document.getElementById("lista").options[k].remove();
-	}
-//	console.log("llargada" + document.getElementById('lista').options.length);
-//	for (var k=0; k<document.getElementById('lista').options.length; k++) {
+<head>
+<meta charset="utf-8">
+<title>Practica B</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/register.css" />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<!-- #Content -->
+	
+	<div id="content" class="container">
+		<!--  <form action="#" method="get" onsubmit=""> -->
+		<form action="servidor.php" method="post" id="registro">
+			<fieldset>
+				<legend>Datos personales</legend>
+				<div class="personal-flex-box">
+					<div class="flex-item">
+						<label for="registro_nombre" >Nombre:</label> 
+				<input type="text"
+					name="nombre" id="registro_nombre" class="form-control"> 
+					<div class="invalid-feedback position-absolute">
+					Por favor introduzca su nombre sin números.
+				</div>
+					</div>
+					<div class="flex-item flex-grow-2">
+						<div class="field-label">Apellidos</div>
+						<input type="text" name="apellidos" />
+						<div class="invalid-feedback position-absolute">
+					Por favor introduzca sus apellidos sin números.
+				</div>
+					</div>
+					<div class="flex-item">
+						<div class="field-label">Fecha nacimineto</div>
+						<input type="text" name="fnacimeinto" placeholder="dd/mm/yyyy" />
+						<div class="invalid-feedback position-absolute">
+					Por favor introduzca su fecha de nacimiento en el formato válido.
+				</div>
+					</div>
+					<div class="flex-item">
+						<div class="field-label">Genero</div>
+						<div class="radio-flex-box">
+							<span><input type="radio" name="genero" value="male" />
+								Hombre</span> <span><input type="radio" name="genero"
+								value="female" /> Mujer</span> <span><input type="radio"
+								name="genero" value="other" /> Otros</span>
+						</div>
+						<div class="invalid-feedback">
+					Hay que seleccionar un género.
+				</div>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Datos de contacto</legend>
+				<div class="contacto-flex-box">
+					<div class="flex-item">
+						<div class="field-label">Email</div>
+						<input type="text" name="email" />
+						<div class="invalid-feedback">
+					Error.
+				</div>
+					</div>
+					<div class="flex-item">
+						<div class="field-label">Telefono</div>
+						<input type="text" name="telefono" />
+							<div class="invalid-feedback">
+					Error.
+				</div>
+					</div>
+					<div class="flex-item flex-grow-2">
+						<div class="field-label">Pagina personal</div>
+						<input type="text" name="ppersonal" />
+							<div class="invalid-feedback">
+					Error.
+				</div>
+					</div>
+				</div>
+
+			</fieldset>
+			<fieldset>
+				<legend>Conocimientos</legend>
+				<div class="conocimientos-flex-box">
+					<div class="flex-item flex-grow-2">
+						<div class="field-label">Lenguajes</div>
+						<select multiple id="lista" name="lista" size="7">
+							<option value="Php">Php</option>
+							<option value="Phyton">Phyton</option>
+							<option value="Java">Java</option>
+							<option value="Jquery">JQuery</option>
+							<option value=".NET">.NET</option>
+						</select>
+					</div>
+					<div class="flex-item">
+						<div class="controls-flex-box">
+							<button type="button" value=">" onclick="seleccion(this);">&gt;</button>
+							<button type="button" value=">>" onclick="seleccion(this);">&gt;&gt;</button>
+							<button type="button" value="<" onclick="seleccion(this);">&lt;</button>
+							<button type="button" value="<<" onclick="seleccion(this);">&lt;&lt;</button>
+						</div>
+
+					</div>
+					<div class="flex-item flex-grow-2">
+						<div class="field-label">Lenguajes</div>
+						<select multiple id="programacion" name="programacion" size="7"></select>
+					</div>
+				</div>
+
+			</fieldset>
+			<fieldset>
+				<div class="submit-flex-box">
+					<div class="flex-item">
+						<button class="btn btn-primary offset-lg-1 offset md-1" id="registro_enviar">Enviar datos</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script>
+
+		function seleccion(boto) {
+			//console.log(boto.value);
+			//console.log(document.getElementById('lista')[document.getElementById('lista').selectedIndex].value);
+			//console.log($('#lista').val());
+			
+
+			if (boto.value == ">") {
+				//var cadena = document.getElementById('lista')[document.getElementById('lista').selectedIndex].value;
+				var opcions = $('#lista').val();
+				for (var i = 0; i < opcions.length; i++) {
+					document.getElementById("programacion").innerHTML += "<option value=\""+opcions[i]+"\">"
+							+ opcions[i] + "</option>";
+					for (var j = 0; j < document.getElementById('lista').options.length; j++) {
+						console.log(document.getElementById("lista").options[j].value);
+						if (document.getElementById("lista").options[j].value == opcions[i]) {
+							document.getElementById("lista").options[j].remove();
+						}
+					}
+				}
+			} else if (boto.value == ">>") {
+				for (var i = 0; i < document.getElementById('lista').options.length; i++) {
+					document.getElementById("programacion").innerHTML += "<option value=\""
+							+ document.getElementById('lista').options[i].value
+							+ "\">"
+							+ document.getElementById('lista').options[i].innerHTML
+							+ "</option>";
+
+				}
+				document.getElementById("lista").innerHTML = "";
+			} else if (boto.value == "<") {
+				var opcionsmenys = $('#programacion').val();
+				for (var i = 0; i < opcionsmenys.length; ui++) {
+					document.getElementById("lista").innerHTML += "<option value=\""+opcionsmenys[i]+"\">"
+							+ opcionsmenys[i] + "</option>";
+					for (var j = 0; j < document.getElementById('programacion').options.length; j++) {
+						//console.log(document.getElementById("programacion").options[j].value)
+						if (document.getElementById("programacion").options[j].value == opcionsmenys[i]) {
+							document.getElementById("programacion").options[j]
+									.remove();
+						}
+					}
+				}
+			} else {
+				for (var i = 0; i < document.getElementById('programacion').options.length; i++) {
+					document.getElementById("lista").innerHTML += "<option value=\""
+							+ document.getElementById('programacion').options[i].value
+							+ "\">"
+							+ document.getElementById('programacion').options[i].innerHTML
+							+ "</option>";
+			}
+				document.getElementById("programacion").innerHTML = "";
+			//console.log(document.getElementById("lista").innerHTML);
+			//	console.log("llargada" + document.getElementById('lista').options.length);
+			//	for (var k=0; k<document.getElementById('lista').options.length; k++) {
+
+			//		console.log("esborrem" + document.getElementById("lista").options[k].value)
+			//		document.getElementById("lista").options[k].remove();
+			//	}
+
+		}
+		}
 		
-//		console.log("esborrem" + document.getElementById("lista").options[k].value)
-//		document.getElementById("lista").options[k].remove();
-//	}
-	
-	
-}
+		
+		document.getElementById("registro_enviar").onclick=function(evt){
+			// capturar event i parar-lo
+			evt.preventDefault();
+			// var totOk control d'enviament
+			var totOk=true;
+			// --- netejar classes 'is-invalid' i 'is-valid'
+			this.form.querySelectorAll("*").forEach(function(item){
+				item.className=item.className.replace(/(is-valid|is-invalid)/g,'');
+			});
+			
+			// ---nombre ---
+			this.form.nombre.value = this.form.nombre.value.trim();
+			var string = this.form.nombre.value;
+			var pattern = /\d/g;
+			if( pattern.test(string) || string=="" ){
+				this.form.nombre.className+=" is-invalid";
+				totOk= false;
+			} else {
+				this.form.nombre.className+=" is-valid";
+			}
+			
+			// ---apellidos ---
+			this.form.apellidos.value = this.form.apellidos.value.trim();
+			var string2 = this.form.apellidos.value;
+			var pattern2 = /\d/g;
+			if( pattern2.test(string2) || string=="" ){
+				this.form.apellidos.className+=" is-invalid";
+				totOk= false;
+			} else {
+				this.form.apellidos.className+=" is-valid";
+			}
+			
+			//---email---
+			this.form.email.value = this.form.email.value.trim();
+			var string3 = this.form.email.value;
+			var pattern3 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			if(this.form.email.value=='' || (pattern3.test(string3)==false)){
+				this.form.email.className+=" is-invalid";
+				totOk= false;
+			} else {
+				this.form.email.className+=" is-valid";
+			}
+			
+			
+			// ------------------------- Password -----------------------------------
+		//	var passwordString=this.form.password.value;
 
+		//	var passwordPattern=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/g; // Format Password
 
-      }
-      </script>
-  </body>
+		//	if( !passwordPattern.test(passwordString) ){
+			// ------------- Afegim la class 'is-invalid' a l'element
+		//	this.form.password.className+=" is-invalid ";
+		//	totOk=false;
+		//	}else{
+			// ------------- Afegim la class 'is-valid' a l'element ---------------
+		//	this.form.password.className+=" is-valid ";
+			//}
+		//	
+			
+			
+			// ------------------------ Comentarios ---------------------------------
+		//	if(this.form.comentarios.value=="" ||this.form.comentarios.value.length>50 ){
+			// ------------- Afegim la class 'is-invalid' a l'element
+		//	this.form.comentarios.className+=" is-invalid ";
+		//	totOk=false;
+		//	}else{
+			// ------------- Afegim la class 'is-valid' a l'element ---------------
+		//	this.form.comentarios.className+=" is-valid ";
+		//	}
+			
+			
+			//----checkbox---
+			//if (! this.form.condiciones.checked) {
+			///	this.form.condiciones.className+=" is-invalid";
+			//	totOk= false;
+			//} else {
+		//		this.form.condiciones.className+=" is-valid";
+			//}
+			
+			
+			if(totOk==true){
+				this.form.submit(); //Disparar l'event submit del form al que pertany el button (this.form)
+				// o be enviar les dades via AJAX
+			}
+			
+		}
+		
+	</script>
+</body>
 </html>
