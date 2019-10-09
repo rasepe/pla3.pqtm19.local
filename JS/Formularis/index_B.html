@@ -76,24 +76,29 @@
 			
 				</div>
 			</fieldset>
+			
 			<fieldset>
+			<div class="flex-item">
 				<legend>Datos de contacto</legend>
-				<div class="contacto-flex-box">
-					<div class="flex-item">
+				<div class="row">
+					<div class="col-md-5">
 						<div class="field-label">Email</div>
 						<input type="text" name="email" class="form-control" id="registro_mail" />
 						<div class="invalid-feedback position-absolute">
 					Por favor introduzca un mail en el formato correcto.
 				</div>
 					</div>
-					<div class="flex-item">
+					<div class="col-md-6">
 						<div class="field-label">Telefono</div>
 						<input type="text" name="telefono" class="form-control" id="registro_telefono" />
 							<div class="invalid-feedback position-absolute">
 					Por favor introduzca un telefono en el formato correcto.
 				</div>
-					</div>
-					<div class="flex-item flex-grow-2">
+				</div>
+				</div>
+				<div class="row">
+					
+					<div class="col-md-5">
 						<div class="field-label">Pagina personal</div>
 						<input type="text" name="ppersonal" class="form-control" id="registro_pagina" />
 							<div class="invalid-feedback position-absolute">
@@ -101,14 +106,16 @@
 				</div>
 					</div>
 				</div>
-
+</div>
 			</fieldset>
+			
 			<fieldset>
+			<div class="row">
 				<legend>Conocimientos</legend>
-				<div class="conocimientos-flex-box">
-					<div class="flex-item flex-grow-2">
+	  		<!--	<div class="conocimientos-flex-box row">  -->
+					<div class="col-md-4 offset-md-1">
 						<div class="field-label">Lenguajes</div>
-						<select multiple id="lista" name="lista" size="7" id="registro_lenguajes">
+						<select multiple id="lista" name="lista" size="7" id="registro_lenguajes" class="form-control">
 							<option value="Php">Php</option>
 							<option value="Phyton">Phyton</option>
 							<option value="Java">Java</option>
@@ -119,24 +126,27 @@
 					Por favor mueva por lo menos un lenguaje a la casilla de la derecha
 				</div>
 					</div>
-					<div class="flex-item">
-						<div class="controls-flex-box">
-							<button id="btn1" type="button" value=">"  onclick="seleccion(this,'lista','programacion');"  >&gt;</button>
-                  <button id="btn2" type="button" value=">>" onclick="seleccion(this,'lista','programacion');" >&gt;&gt;</button>
-                  <button id="btn3" type="button" value="<"  onclick="seleccion(this,'lista','programacion');"  >&lt;</button>
-                  <button id="btn4" type="button" value="<<" onclick="seleccion(this,'lista','programacion');" >&lt;&lt;</button>
+					<div class="col-md-1 mt-5 pt-4">
+						
+							<button id="btn1" type="button" value=">"  onclick="seleccion(this,'lista','programacion');" class="btn btn-light border border-dark m-2" >&gt;</button>
+                  <button id="btn2" type="button" value=">>" onclick="seleccion(this,'lista','programacion');" class="btn btn-light border border-dark m-2" >&gt;&gt;</button>
+                  <button id="btn3" type="button" value="<"  onclick="seleccion(this,'lista','programacion');" class="btn btn-light border border-dark m-2"  >&lt;</button>
+                  <button id="btn4" type="button" value="<<" onclick="seleccion(this,'lista','programacion');" class="btn btn-light border border-dark m-2" >&lt;&lt;</button>
 						</div>
 
-					</div>
-					<div class="flex-item flex-grow-2">
+				<!--	</div> -->
+					<div class="col-md-4">
 						<div class="field-label">Lenguajes</div>
-						<select multiple id="programacion" name="programacion" size="7" class="form-control"></select>
+						<select multiple id="programacion" name="programacion[]" size="7" class="form-control">
+						
+						  
+						</select>
 						<div class="invalid-feedback position-absolute">
 					Por favor introduzca por lo menos un lenguaje en la casilla de la derecha.
 				</div>
 					</div>
 				</div>
-
+</div>
 			</fieldset>
 			<fieldset>
 				<div class="submit-flex-box">
@@ -309,7 +319,8 @@
 		document.getElementById("registro_telefono").onblur=function(){
 			this.form.telefono.value = this.form.telefono.value.trim();
 			var string5 = this.form.telefono.value;
-			var pattern5 = /((\+[0-9]{2}\s)|(0{2}[0-9]{2}\s))[0-9]{9}/;
+			//var pattern5 = /((\+[0-9]{2}\s)|(0{2}[0-9]{2}\s))[0-9]{9}/;
+			var pattern5 = /((\+\d*)|00\d{2})?(\d){9}$/;
 			if(string5=='' || (pattern5.test(string5)==false)){
 				this.form.telefono.className+=" is-invalid";
 				totOk= false;
@@ -329,7 +340,7 @@
 			}
 		}
 		document.getElementById("programacion").onblur=function(){
-			if (this.form.programacion.value=='') {
+			if (this.form["programacion[]"].options.length==0) {
 				this.form.programacion.className+=" is-invalid";
 				totOk= false;
 			} else {
@@ -414,7 +425,8 @@
 			//---telefono---
 			this.form.telefono.value = this.form.telefono.value.trim();
 			var string5 = this.form.telefono.value;
-			var pattern5 = /((\+[0-9]{2}\s)|(0{2}[0-9]{2}\s))[0-9]{9}/;
+			//var pattern5 = /((\+[0-9]{2}\s)|(0{2}[0-9]{2}\s))[0-9]{9}/;
+			var pattern5 = /((\+\d*)|00\d{2})?(\d){9}$/;
 			if(string5=='' || (pattern5.test(string5)==false)){
 				this.form.telefono.className+=" is-invalid";
 				totOk= false;
@@ -434,7 +446,9 @@
 			}
 			
 			//-----lenguajes programacion----
-			if (this.form.programacion.value=='') {
+			//if (this.form.programacion.value=='') {
+				
+			if	(this.form["programacion[]"].options.length==0) {
 				this.form.programacion.className+=" is-invalid";
 				totOk= false;
 			} else {

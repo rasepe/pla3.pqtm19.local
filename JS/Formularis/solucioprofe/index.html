@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Practica B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/register.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" > 
+  </head>
+  <body>
+      <!-- #Content -->
+      <div id="content"> 
+         <form action="servidor.php" method="post" >
+          <fieldset>
+            <legend>Datos personales</legend>
+            <div class="personal-flex-box">
+              <div class="flex-item  position-relative">
+                <div class="field-label">Nombre</div>
+                <input class="form-control " type="text" name="nombre" value=""/>
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca su nombre sin números.
+				</div>
+              </div>
+              <div class="flex-item flex-grow-2 position-relative" >
+                <div class="field-label">Apellidos</div>
+                <input class="form-control " type="text" name="apellidos"/>
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca sus apellidos sin números.
+				</div>
+              </div>
+              <div class="flex-item position-relative">
+                <div class="field-label">Fecha naciemineto</div>
+                <input class="form-control "  type="text" name="fnacimeinto"  placeholder="dd/mm/yyyy"/>
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca una fecha vàlida.
+				</div>
+              </div>
+              <div class="flex-item" >
+                <div class="field-label">Genero</div>
+                <div class="radio-flex-box position-relative ">
+                  <!--  radio.male -->
+                  <span class="form-check  position-static">
+                  	<input class="form-check-input   " type="radio" name="genero" value="male" />
+                  	<label class="form-check-label">Hombre</label>
+                  	<!-- .invalid-feedback -->
+                  	<span class="invalid-feedback position-absolute">
+						Por favor selecciones una opción
+					</span>
+                  </span>
+                  <!-- radio.female -->
+                  <span class="form-check">
+                  	<input class="form-check-input " type="radio" name="genero" value="female" />
+                  	<label class="form-check-label"> Mujer</label>
+                  </span>
+                  <!-- radio.other -->
+                  <span class="form-check" >
+                 	<input class="form-check-input  " type="radio" name="genero" value="other" /> 
+                 	<label class="form-check-label">Otros</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Datos de contacto</legend>
+            <div class="contacto-flex-box">
+              <div class="flex-item position-relative">
+                <div class="field-label">Email</div>
+                <input class="form-control " type="text" name="email" />
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca una dirección válida.
+				</div>
+              </div>
+              <div class="flex-item position-relative">
+                <div class="field-label">Telefono</div>
+                <input class="form-control " type="text" name="telefono" />
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca un numero válido.
+				</div>
+              </div>
+              <div class="flex-item flex-grow-2 position-relative" >
+                <div class="field-label">Pagina personal</div>
+                <input class="form-control " type="text" name="ppersonal" />
+                <div class="invalid-feedback position-absolute">
+					Por favor introduzca un URL válida.
+				</div>
+              </div>
+            </div>
+              
+          </fieldset>
+          <fieldset>
+            <legend>Conocimientos</legend>
+            <div class="conocimientos-flex-box">
+              <div class="flex-item flex-grow-2" >
+                <div class="field-label">Lenguajes</div>
+                <select multiple id="lista" name="lista" size="7">
+                  <option value="Php">Php</option>
+                  <option value="Phyton">Phyton</option>
+                  <option value="Java">Java</option>
+                  <option value="Jquery">JQuery</option>
+                  <option value="net">.NET</option>
+                </select>
+              </div>
+              <div class="flex-item" >
+                <div class="controls-flex-box">
+                  <button id="btn1" type="button" value=">"  onclick="seleccion(this,'lista','programacion');"  >&gt;</button>
+                  <button id="btn2" type="button" value=">>" onclick="seleccion(this,'lista','programacion');" >&gt;&gt;</button>
+                  <button id="btn3" type="button" value="<"  onclick="seleccion(this,'lista','programacion');"  >&lt;</button>
+                  <button id="btn4" type="button" value="<<" onclick="seleccion(this,'lista','programacion');" >&lt;&lt;</button>
+                </div>
+              </div>
+              <div class="flex-item flex-grow-2 position-relative" >
+                <div class="field-label">Lenguajes</div>
+                <select class="form-control "  multiple id="programacion" name="programacion[]" size="7">
+                
+                
+                
+                </select>
+                <div class="invalid-feedback position-absolute">
+					Por favor seleccione uno o más lenguajes.
+				</div>
+              </div>
+            </div>
+              
+          </fieldset>
+          <fieldset>
+            <div class="submit-flex-box">
+              <div class="flex-item">
+                <input id="btnForm"  type="submit" value="Enviar datos" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <script type="text/javascript">
+      
+      function seleccion(objButton,IdOrigen,IdDestino){
+    	  var objLlistaOrigen=document.getElementById(IdOrigen);
+    	  var objLlistaDestino=document.getElementById(IdDestino);
+    	  switch(objButton.value){
+    	  	case '>' :
+    	  			for(var i=0; i<objLlistaOrigen.options.length; i++){
+    	    		  if(objLlistaOrigen.options[i].selected==true){
+    	    			  objLlistaDestino.appendChild(objLlistaOrigen.options[i]);
+    	    			  i--;
+    	    		  }
+    	    	  	}
+    	  			break;
+    	  	case '>>' :
+	    	  		for(var i=0; i<objLlistaOrigen.options.length; i++){
+	  	    		  objLlistaDestino.appendChild(objLlistaOrigen.options[i]);
+	  	    		  i--;
+	  	    		}
+    	  			break;
+    	  	case '<' :
+	    	  		for(var i=0; i<objLlistaDestino.options.length; i++){
+	  	    		  if(objLlistaDestino.options[i].selected==true){
+	  	    			  objLlistaOrigen.appendChild(objLlistaDestino.options[i]);
+	  	    			  i--;
+	  	    		  }
+	  	    	  	}
+    	  			break;
+    	  	case '<<' :
+    	  			for(var i=0; i<objLlistaDestino.options.length; i++){
+    	  				objLlistaOrigen.appendChild(objLlistaDestino.options[i]);
+	  	    		  i--;
+	  	    		}
+    	  			break;
+    	  }
+      }
+      
+      
+      /*document.getElementById("btn1").onclick=function(){
+    	  var objLlista=document.getElementById('lista');
+    	  for(var i=0; i<objLlista.options.length; i++){
+    		  if(objLlista.options[i].selected==true){
+    			  document.getElementById('programacion').appendChild(objLlista.options[i]);
+    			  i--;
+    		  }
+    	  }
+      }
+      document.getElementById("btn2").onclick=function(){
+    	  var objLlista=document.getElementById('lista');
+    	  for(var i=0; i<objLlista.options.length; i++){
+    		  document.getElementById('programacion').appendChild(objLlista.options[i]);
+			  i--;
+    	  }
+      }
+      document.getElementById("btn3").onclick=function(){
+    	  var objLlista=document.getElementById('programacion');
+    	  for(var i=0; i<objLlista.options.length; i++){
+    		  if(objLlista.options[i].selected==true){
+    			  document.getElementById('lista').appendChild(objLlista.options[i]);
+    			  i--;
+    		  }
+    	  }
+      }
+      document.getElementById("btn4").onclick=function(){
+    	  var objLlista=document.getElementById('programacion');
+    	  for(var i=0; i<objLlista.options.length; i++){
+    		  document.getElementById('lista').appendChild(objLlista.options[i]);
+			  i--;
+    	  }
+      }*/
+      
+      </script>
+  	  <script type="text/javascript">
+  	
+function validatedate(inputText) {
+	var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+	// Match the date format through regular expression
+	if (inputText.value.match(dateformat)) {
+		//Test which seperator is used '/' or '-'
+		var opera1 = inputText.value.split('/');
+		var opera2 = inputText.value.split('-');
+		// Extract the string into month, date and year
+		if (opera1.length > 1) {
+			var pdate = inputText.value.split('/');
+		} else if (opera2.length > 1) {
+			var pdate = inputText.value.split('-');
+		}
+		var dd = parseInt(pdate[0]);
+		var mm = parseInt(pdate[1]);
+		var yy = parseInt(pdate[2]);
+		// Create list of days of a month [assume there is no leap year by
+		var ListofDays = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+		if (mm == 1 || mm > 2) {
+			if (dd > ListofDays[mm - 1]) {
+				return false; //alert('Invalid date format!');
+			}else{
+				return true;
+			}
+		}
+		if (mm == 2) {
+			var lyear = false;
+			if ((!(yy % 4) && yy % 100) || !(yy % 400)) {
+				lyear = true;
+			}
+			if ((lyear == false) && (dd >= 29)) {
+				return false; //alert('Invalid date format!');
+			}
+			if ((lyear == true) && (dd > 29)) {
+				return false; //alert('Invalid date format!');
+			}
+			return true;
+		}
+	} else {
+		return false; //alert("Invalid date format!");
+	}
+}
+document.getElementById("btnForm").onclick = function(evt) {
+	// Aturar Event 
+	evt.preventDefault();
+	// var totOk control de enviament
+	var totOk = true;
+	// -- netejar class="is-invalid" o class="is-valid" --
+	this.form.querySelectorAll("*").forEach(function(el) {
+		el.className = el.className.replace(/(is-invalid|is-valid)/g, '');
+	});
+	// ---------- validacio input[name=nombre] ----------
+	this.form.nombre.value = this.form.nombre.value.trim();
+	var nombrePattern = /\d/g;
+	var strNombre = this.form.nombre.value;
+	if (nombrePattern.test(strNombre)|| strNombre == "") {
+		this.form.nombre.className += " is-invalid";
+		totOk = false;
+	} else {
+		this.form.nombre.className += " is-valid";
+	}
+	// ---------- validacio input[name=apellidos] -------
+	this.form.apellidos.value = this.form.apellidos.value.trim();
+	var apellidosPattern = /\d/g;
+	var strApellidos = this.form.apellidos.value;
+	if (apellidosPattern.test(strNombre) || strApellidos == "") {
+		this.form.apellidos.className += " is-invalid";
+		totOk = false;
+	} else {
+		this.form.apellidos.className += " is-valid";
+	}
+	
+	// ------------validacio input[name=fnacimeinto] ------
+    if(! validatedate(this.form.fnacimeinto)){
+    	this.form.fnacimeinto.className += " is-invalid";
+    	totOk = false;
+    }else{
+    	this.form.fnacimeinto.className += " is-valid";
+    }
+	// -------------validacion input[name=genero] ----------
+	if( this.form.genero.value==""){
+		this.form.genero.forEach(function(element){
+			element.className+=' is-invalid';
+		});
+		totOk=false;
+	}else{
+		this.form.genero.forEach(function(element){
+			element.className+=' is-valid';
+		});
+	}
+	// --------------validacion input[name=email] -------------------
+	this.form.email.value = this.form.email.value.trim();
+	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+	var strEmail = this.form.email.value;
+	if (!emailPattern.test(strEmail) || strEmail == "") {
+		this.form.email.className += " is-invalid";
+		totOk = false;
+	} else {
+		this.form.email.className += " is-valid";
+	}
+	
+	// ------------- validar input[name=telefono] --------------------
+	this.form.telefono.value = this.form.telefono.value.trim();
+	var telefonoPattern = /^((\+\d*)|00\d{2})?(\d){9}$/;
+	var strTelefono = this.form.telefono.value;
+	if (!telefonoPattern.test(strTelefono) || strTelefono == "") {
+		this.form.telefono.className += " is-invalid";
+		totOk = false;
+	} else {
+		this.form.telefono.className += " is-valid";
+	}
+	
+	//-------------- validar input[name=ppersonal] ----------------------
+	this.form.ppersonal.value = this.form.ppersonal.value.trim();
+	var urlPattern=/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+	var strPpersonal = this.form.ppersonal.value;
+	if (!urlPattern.test(strPpersonal) || strPpersonal == "") {
+		this.form.ppersonal.className += " is-invalid";
+		totOk = false;
+	} else {
+		this.form.ppersonal.className += " is-valid";
+	}
+	
+	// --------------- validacion select[name=programacion[]] --------
+	if(this.form["programacion[]"].options.length==0){
+		this.form["programacion[]"].className += " is-invalid";
+		totOk = false;
+	}else{
+		this.form["programacion[]"].className += " is-valid";
+	}
+	
+	
+	// ---------- Prosseguir el submit ----------------
+	if (totOk == true) {
+		debugger;
+		// Cal seleccionar tots els options de la llista de programacion
+		for(i in this.form["programacion[]"].options){
+			this.form["programacion[]"].options[i].selected=true;
+		}
+		this.form.submit(); // Disparar l'event submit del form 
+		// o be enviar les dades via AJAX 
+	}
+}
+	</script>
+  </body>
+</html>
