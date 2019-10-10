@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+var txtJSON = `
+{
+	"Title": "The Cuckoo's Calling",
+	"Author": "Robert Galbraith",
+	"Genre": "Classic crime novel",
+	"Detail": {
+		"Publisher": "Little Brown",
+		"Publication_Year": 2013,
+		"ISBN-13": 978524248654,
+		"Language": "English",
+		"Pages": 494
+	},
+	"Price": [
+		{
+			"type": "Hardcover",
+			"price": 16.65
+		},
+		{
+			"type": "Kindle Edition",
+			"price":7.03
+		}
+	]
+}
+`;
+var objBook = JSON.parse(txtJSON);
+console.log(objBook);
+console.log(objBook.Title)
+//var test = $.getJSON(test.json); 
+//var jsontest = JSON.parse(test);
+//console.log(jsontest);
+
+</script>
+</body>
+</html>
