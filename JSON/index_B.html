@@ -131,6 +131,9 @@ Array.prototype.unique=function(a){
 			 document.getElementsByTagName("select")[0].onchange=function(){
 					var valortriat = document.getElementsByTagName("select")[0].value;
 					console.log(valortriat);
+				    if (valortriat == "") {
+				    	location.reload();
+				    } else {
 					document.querySelector("table tbody").innerHTML="";
 					for (var i=0 ; i<objCotxes.picotxes.cotxe.length; i++){
 						 if (objCotxes.picotxes.cotxe[i].marca == valortriat){
@@ -142,6 +145,7 @@ Array.prototype.unique=function(a){
 						document.querySelector("table tbody").innerHTML+=cadena;
 						 }
 						}
+				    }
 					
 					
 					
