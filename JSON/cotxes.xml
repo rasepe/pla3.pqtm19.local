@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE picotxes
+[
+<!ELEMENT picotxes (cotxe*)>
+<!ELEMENT cotxe (marca,model,any,cilindrada,color)>
+<!ELEMENT marca (#PCDATA)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT any (#PCDATA)>
+<!ELEMENT cilindrada (#PCDATA)>
+<!ELEMENT color (#PCDATA)>
+]>
+<picotxes>
+	<cotxe>
+		<marca>Renault</marca>
+		<model>Clio</model>
+		<any>2014-01-28</any>
+		<cilindrada>2000</cilindrada>
+		<color>Negre</color>
+	</cotxe>
+	<cotxe>
+		<marca>Alfa Romeo</marca>
+		<model>165</model>
+		<any>2014-01-28</any>
+		<cilindrada>2000</cilindrada>
+		<color>Verd</color>
+	</cotxe>
+	<cotxe>
+		<marca>Seat</marca>
+		<model>Ibiza</model>
+		<any>2014-01-28</any>
+		<cilindrada>1900</cilindrada>
+		<color>Groc</color>
+	</cotxe>
+	<cotxe>
+		<marca>Renault</marca>
+		<model>Megane</model>
+		<any>2014-01-28</any>
+		<cilindrada>2000</cilindrada>
+		<color>Gris</color>
+	</cotxe>
+	<cotxe>
+		<marca>Citroën</marca>
+		<model>Picasso</model>
+		<any>2014-01-28</any>
+		<cilindrada>2000</cilindrada>
+		<color>Gris</color>
+	</cotxe>
+	<cotxe>
+		<marca>Audi</marca>
+		<model>Q1</model>
+		<any>2014-01-28</any>
+		<cilindrada>2500</cilindrada>
+		<color>Vermell</color>
+	</cotxe>
+</picotxes>
