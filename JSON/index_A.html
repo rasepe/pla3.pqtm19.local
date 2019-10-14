@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Exercici PLA3_s5.C: Creació de document JSON de la fabrica de dolços</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  >
+</head>
+<body>
+  <div class="jumbotron">
+    <h1>
+      <i class="fa fa-clipboard"></i> Exercici PLA3_s5.C: Creació de document JSON de la fabrica de dolços 
+    </h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+        <div  id="industryBox" class="col-12">
+        <h3>Industria</h3>
+        <table class="table">
+          <thead><tr></tr></thead>
+          <tbody><tr></tr></tbody>
+        </table>
+        
+        </div>
+    </div>
+    <div class="row">
+        <div id="productBox" class="col-12">
+        <h3>Productes</h3>
+        <table class="table">
+          <thead><tr></tr></thead>
+          <tbody></tbody>
+        </table>
+        
+        </div>
+    </div>
+  </div>
+  
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  
+  var txtJSON = `{
+   "industry": {
+      "fabricant": "Dolços el poble",
+      "adress": "Camí del Pont Vell, 1. Barcelona",
+      "CIF": "G0000000X",
+      "contact": "atencioalclient@dulceselpueblo.cat",
+      "web": "http://www.dolçoselpoble.cat/"
+   },
+   "product": [
+      {
+         "description": "Ensaïmada de crema",
+         "reference": "B-0001",
+         "weight": "50.00",
+         "lot": "2013-B-0001-0254",
+         "packingDate": "2013-11-05",
+         "expirationDate": "2013-11-11",
+         "web": "http://www.dolçoselpoble.cat/producte/ensaimada"
+      },
+      {
+         "description": "Magdalenas caseras",
+         "reference": "B-0002",
+         "weight": "30.00",
+         "lot": "2013-B-0002-0051",
+         "packingDate": "2013-05-11",
+         "expirationDate": "2014-01-11",
+         "web": "http://www.dolçoselpoble.cat/producte/magdalenes"
+      },
+      {
+         "description": "Polvorones",
+         "reference": "B-0003",
+         "weight": "65.00",
+         "lot": "2013-B-0002-0654",
+         "packingDate": "2013-05-11",
+         "expirationDate": "2014-09-11",
+         "web": "http://www.dolçoselpoble.cat/producte/polvorons"
+      }
+   ]
+}`
+  
+var objFabrica= JSON.parse(txtJSON);
+console.log(objFabrica);
+for(key in objFabrica.industry){
+	document.querySelector("#industryBox table thead>tr").innerHTML+="<th>"+key+"</th>";
+	document.querySelector("#industryBox table tbody>tr").innerHTML+="<td>"+
+	objFabrica.industry[key] + "</td>";
+	}
+	
+	
+for (var i=0 ; i<objFabrica.product.length; i++){
+	if(i==0){
+	for(key in objFabrica.product[i]){
+	document.querySelector("#productBox table thead>tr").innerHTML+="<th>"+key+"</th>";
+	}
+	}
+	var cadena="<tr>";
+	for(key in objFabrica.product[i]){
+	cadena+="<td>"+objFabrica.product[i][key]+"</td>";
+	}
+	cadena+="</tr>";
+	document.querySelector("#productBox table tbody").innerHTML+=cadena
+	}
+
+  
+  </script>
+</body>
+</html>

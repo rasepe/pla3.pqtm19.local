@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Exercici: PLA3_s5.B: localStorage + Selector Idioma</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  >
+</head>
+<body>
+  <div class="jumbotron">
+    <h1>
+      <i class="fa fa-clipboard"></i> Exercici: PLA3_s5.B: localStorage +
+      Selector Idioma
+    </h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron">
+          <h2 id="wellcomeBox"></h2>
+        </div>
+      </div>
+    </div>
+    <form>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-row">
+            <div class="col-4">
+              <label for="selLanguages">Language</label>
+              <select id="selLanguages" class="form-control">
+                <option value="">-- Select a Language --</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  	
+  
+ // function afegeixJSON() {
+		//console.log("funciona");
+		var txtJSONLanguage = '[{ "name":"English", "value":"en" },{ "name":"Spanish", "value":"es" },{ "name":"French", "value":"fr" }]';
+		var objLanguage = JSON.parse(txtJSONLanguage);
+		for (var i in objLanguage) {
+			var cadena = '<option value="'+objLanguage[i].value+'">'
+					+ objLanguage[i].name + '</option>';
+			document.getElementById("selLanguages").innerHTML += cadena;
+	console.log(cadena);
+		}
+//	}
+		
+		document.getElementById('selLanguages').onchange=function(){
+			var valortriat = document.getElementById("selLanguages").value;
+			//console.log("this.value" + this.value);
+			if(this.value!=""){
+			window.localStorage.setItem("lang", valortriat);
+			location.reload();
+			}
+			
+			
+			
+			
+			
+			
+			}
+		
+ 		var objTranslator = JSON.parse('{ "en": {"wellcome":"Wellcome to the site"},"es": {"wellcome":"Bienvenido al Sitio"},"fr": {"wellcome":"Bienvenu au Site"}}');
+ 		var keyLang=window.localStorage.getItem("lang");
+		console.log(keyLang);
+		console.log(objTranslator[keyLang]["wellcome"]);
+		if( keyLang ){
+			//console.log(cookieLang.value);
+		document.getElementById('wellcomeBox').innerHTML= objTranslator[keyLang]["wellcome"];
+		document.getElementById('selLanguages').value=keyLang;
+		}else{
+		document.getElementById('wellcomeBox').innerHTML="";
+		document.getElementById('selLanguages').value="";
+		}
+		
+		
+		
+  </script>
+  
+  
+</body>
+</html>

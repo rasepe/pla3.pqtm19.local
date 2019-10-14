@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE production 
+[
+<!ELEMENT production (industry,product*)>
+<!ELEMENT industry (fabricant,adress,CIF,contact,web)>
+<!ELEMENT fabricant (#PCDATA)>
+<!ELEMENT adress (#PCDATA)>
+<!ELEMENT CIF (#PCDATA)>
+<!ELEMENT contact (#PCDATA)>
+<!ELEMENT web (#PCDATA)>
+<!ELEMENT product (description,reference,weight,lot,packingDate,expirationDate,web)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT reference (#PCDATA)>
+<!ELEMENT weight (#PCDATA)>
+<!ELEMENT lot (#PCDATA)>
+<!ELEMENT packingDate (#PCDATA)>
+<!ELEMENT expirationDate (#PCDATA)>
+]>
+<production>
+  <industry>
+    <fabricant>Dolços el poble</fabricant>
+    <adress>Camí del Pont Vell, 1. Barcelona</adress>
+    <CIF>G0000000X</CIF>
+    <contact>atencioalclient@dulceselpueblo.cat</contact>
+    <web>http://www.dolçoselpoble.cat/</web>
+  </industry>
+  <product>
+    <description>Ensaïmada de crema</description>
+    <reference>B-0001</reference>
+    <weight>50.00</weight>
+    <lot>2013-B-0001-0254</lot>
+    <packingDate>2013-11-05</packingDate>
+    <expirationDate>2013-11-11</expirationDate>
+    <web>http://www.dolçoselpoble.cat/producte/ensaimada</web>
+  </product>
+  <product>
+    <description>Magdalenas caseras</description>
+    <reference>B-0002</reference>
+    <weight>30.00</weight>
+    <lot>2013-B-0002-0051</lot>
+    <packingDate>2013-05-11</packingDate>
+    <expirationDate>2014-01-11</expirationDate>
+    <web>http://www.dolçoselpoble.cat/producte/magdalenes</web>
+  </product>
+  <product>
+    <description>Polvorones</description>
+    <reference>B-0003</reference>
+    <weight>65.00</weight>
+    <lot>2013-B-0002-0654</lot>
+    <packingDate>2013-05-11</packingDate>
+    <expirationDate>2014-09-11</expirationDate>
+    <web>http://www.dolçoselpoble.cat/producte/polvorons</web>
+  </product>
+</production>
