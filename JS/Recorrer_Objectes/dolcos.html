@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="tblIndustry">
+		<thead></thead>
+		<tbody></tbody>
+	</table>
+	<table id="tblProduct">
+		<thead></thead>
+		<tbody></tbody>
+	</table>
+<script type="text/javascript">
+
+	// Crear instancia de l'objecte XMLHttpRequest sobre la variable xhr
+	if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+		xhr = new XMLHttpRequest();
+	} else if (window.ActiveXObject) { // IE
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	// Definir la funció de callBack()
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState == 4 &&  xhr.status == 200 ) {
+		    // tot va bé, s'ha rebut la resposta
+			var objDolsos=JSON.parse(xhr.responseText);
+		/* 	bookTmpl=bookTmpl.replace(/objBook\.Title/g,objBook.Title);
+			bookTmpl=bookTmpl.replace(/objBook\.Author/g,objBook.Author);
+			bookTmpl=bookTmpl.replace(/objBook\.Genre/g,objBook.Genre);
+			bookTmpl=bookTmpl.replace(/objBook\.Detail\.Language/g,objBook.Detail.Language);
+			bookTmpl=bookTmpl.replace(/objBook\.Detail\.Pages/g,objBook.Detail.Pages);
+			bookTmpl=bookTmpl.replace(/objBook\.Detail\.Publication_Year/g,objBook.Detail.Publication_Year);
+			bookTmpl=bookTmpl.replace(/objBook\.Detail\.ISBN-13/g,objBook.Detail["ISBN-13"]);
+			document.getElementById('boxBook').innerHTML=bookTmpl;
+			
+			var cadena="<table class=\"table \">";
+			for(var i=0 ; i< objBook.Price.length; i++){
+				cadena+="<tr>";
+				cadena+="<td>"+objBook.Price[i].type+"</td>";
+				cadena+="<td>"+objBook.Price[i].price+"</td>";
+				cadena+="</tr>";
+			}
+			cadena+="</table>";
+			document.querySelector("#boxBook .card-footer").innerHTML = cadena; */
+			console.log(objDolsos);
+			var arrKeys= Object.keys(objDolsos.production.industry);
+			console.log(arrKeys);
+			//taula industry mètode 1 thead
+			var cadena="<tr>";
+			for(var i=0; i<arrKeys.length; i++){
+				cadena+="<td>"+arrKeys[i]+"</td>";
+			}
+			cadena += "</tr>";
+			document.querySelector("#tblIndustry thead").innerHTML += cadena;
+			//taula industry mètode 2 thead
+			var cadena="<tr>";
+			for(key in objDolsos.production.industry) {
+				cadena += "<td>"+key+"</td>";
+			}
+			cadena +="</tr>";
+			document.querySelector("#tblIndustry thead").innerHTML += cadena;
+			
+			//taula industry tbody
+			var arrValues=Object.values(objDolsos.production.industry);
+			var cadena="<tr>";
+			for(var i=0; i<arrValues.length; i++){
+				cadena+="<td>"+arrValues[i]+"</td>";
+			}
+			cadena+="</tr>";
+			document.querySelector("#tblIndustry tbody").innerHTML+=cadena;
+			//taula industry tbody metode 2
+			var cadena="<tr>";
+			 for (key in objDolsos.production.industry){
+				cadena+="<td>"+objDolsos.production.industry[key]+"</td>";
+			}
+			cadena+="</tr>";
+			document.querySelector("#tblIndustry tbody").innerHTML+=cadena; 
+			
+			//head table #tblProduct thead
+			var arrKeys = Object.keys(objDolsos.production.product[0]);
+			var cadena="<tr>";
+			for (var i=0; i<arrKeys.length; i++) {
+				cadena+="<td>"+arrKeys[i]+"</td>";
+			}
+			cadena+="</tr>";
+			document.querySelector("#tblProduct thead").innerHTML+=cadena; 
+			//head table #tblProduct thead amb forin
+			var cadena="<tr>";
+			for (key in objDolsos.production.product[0]){
+				cadena+="<td>"+[key]+"</td>";
+			}
+			cadena+="</tr>";
+			document.querySelector("#tblProduct thead").innerHTML+=cadena;
+			
+			//body 
+			for (var i=0; i<objDolsos.production.product.length; i++){
+				//cada iteracio de l'array serà una fila
+				var cadena="<tr>";
+				var arrValues=Object.values(objDolsos.production.product[i]);
+				for (var j=0; j<arrValues.length; j++) {
+					cadena+="<td>"+arrValues[j]+"</td>";
+				}
+				cadena+="</tr>";
+				document.querySelector("#tblProduct tbody").innerHTML+=cadena;
+			}
+			//body amb for in
+			for (var i=0; i<objDolsos.production.product.length; i++){
+				var cadena="<tr>";
+				for (key in objDolsos.production.product[i]){ //key in objecte
+					cadena+="<td>"+objDolsos.production.product[i][key]+"</td>";  //nomobjecte[key]
+				}
+				cadena+="</tr>";
+				document.querySelector("#tblProduct tbody").innerHTML+=cadena;
+			}
+			
+			
+		}else if(xhr.readyState == 4 &&  xhr.status == 404){
+			alert('Ho sentim el servidor sembla que no es troba disponible');
+		}
+		
+	};
+	// Definim els parametres de sol·licitus HTTP
+	xhr.open('GET','http://pla3.pqtm19.local/JSON/dolsos.json',true);
+	// Iniciem la sol·licitud
+	xhr.send(null);
+
+</script>	
+</body>
+</html>
