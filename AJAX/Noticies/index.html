@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PLA3_s6.A - Actualizació periodica de continguts</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+	<div id="ticker"></div>
+
+	<div id="acciones">
+		<input type="button" id="detener" value="Aturar" /> <input
+			type="button" id="anterior" value="&laquo; Anterior" /> <input
+			type="button" id="siguiente" value="Següent &raquo;" />
+	</div>
+
+	<div id="contenidos">
+		<h1>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h1>
+		<p>Proin tristique condimentum sem. Fusce lorem sem, laoreet nec,
+			laoreet et, venenatis nec, ligula. Nunc dictum sodales lorem. Fusce
+			turpis. Nullam semper, ipsum ut ultrices mattis, nulla magna luctus
+			purus, sit amet vehicula magna magna vel velit.</p>
+
+		<h2>Morbi a lacus. Proin pharetra nisi id est.</h2>
+
+		<p>Maecenas mollis suscipit sapien. Pellentesque blandit dui eu
+			mauris. Etiam elit urna, iaculis non, dignissim in, fermentum nec,
+			ipsum. Nulla commodo aliquam lectus. Sed vulputate diam ac sapien
+			accumsan consequat. Aliquam id urna sed dolor tincidunt tempor.</p>
+
+		<h2>Quisque consequat. Nullam vel justo.</h2>
+
+		<p>Cras sit amet elit a mauris ultricies viverra. Phasellus
+			placerat quam et magna. Nunc sed tellus. Pellentesque hendrerit
+			pellentesque nunc. Aenean turpis. Sed justo tellus, mollis at,
+			euismod at, pellentesque eu, tellus. Nam vulputate. Nunc porttitor
+			sapien tristique velit. Vestibulum tempus, quam non dapibus
+			pellentesque, sem nulla sagittis ligula, et volutpat turpis felis
+			vitae nunc.</p>
+
+		<p>Ut eros magna, congue in, sodales ac, facilisis ac, dolor.
+			Aenean faucibus pellentesque est. Proin cursus. Vivamus mollis enim
+			in magna. Donec urna risus, convallis eget, aliquet non, auctor sit
+			amet, leo. Duis tellus purus, pharetra in, cursus sed, posuere
+			semper, lorem. Fusce eget velit nec felis tempus gravida. Donec et
+			augue vitae nulla posuere hendrerit. Nulla vehicula scelerisque
+			massa. Phasellus eget lorem id quam molestie ultrices. Integer ac
+			ligula sit amet lectus condimentum euismod. Sed malesuada orci eu
+			neque.</p>
+	</div>
+	<script type="text/javascript">
+		if (window.XMLHttpRequest) {
+			var xhr = new XMLHttpRequest();
+		} else {
+			var xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		var intervalo = null;
+		
+		var noticias = [];
+		var numeroElemento = null;
+		
+		//SetInterval fa de cronòmetre per iniciar la funció cada 1000 ms.
+		intervalo = setInterval(descargaNoticia, 1000);
+		function descargaNoticia() {
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var fechaHora = new Date();
+					var hora = fechaHora.getHours().toString() + ":" +
+					fechaHora.getMinutes().toString() + ":" +
+					fechaHora.getSeconds().toString();
+					
+					var newObj = {
+							hora: hora,
+							titular: xhr.responseText
+							};
+							noticias.push(newObj);
+					
+					document.getElementById('ticker').innerHTML = "<strong>" + hora +
+					"</strong> " +xhr.responseText;
+				}
+			}
+			xhr.open('GET', 'generaContenidos.php' + '?nocache='
+					+ Math.random(), true);
+			xhr.send(null);
+		}
+		
+		document.getElementById('detener').onclick=function(){
+			if(document.getElementById('detener').value=="Aturar"){
+			clearInterval(intervalo);
+			//document.getElementById('detener').setAttribute('value','Iniciar');
+			document.getElementById('detener').value = 'Iniciar';
+			}else{
+				document.getElementById('detener').value = 'Aturar';
+				intervalo = setInterval(descargaNoticia, 1000);
+				}
+				}
+		
+		document.getElementById('anterior').onclick = function(){
+			clearInterval(intervalo); // atura el cronòmetre
+			document.getElementById('detener').value = 'Iniciar';
+			if (numeroElemento == null) {
+			numeroElemento = noticias.length - 1; // últim de l’array
+			}
+			if (numeroElemento > 0) { // quan valgui ==0 no em de retrocedir
+			numeroElemento--;
+			}
+			var noticia = noticias[numeroElemento];
+			document.getElementById('ticker').innerHTML = "<strong>" +
+			noticia.hora + "</strong> " + noticia.titular;
+			}
+		
+		document.getElementById('siguiente').onclick =function(){
+			clearInterval(intervalo);
+			document.getElementById('detener').value = 'Iniciar';
+			if (numeroElemento == null) {
+			numeroElemento = noticias.length - 1;
+			}
+			if (numeroElemento < noticias.length - 1) {
+				numeroElemento++;
+			}
+			var noticia = noticias[numeroElemento];
+			document.getElementById('ticker').innerHTML = "<strong>" +
+			noticia.hora + "</strong> " + noticia.titular;
+			}
+			
+	</script>
+</body>
+</html>
