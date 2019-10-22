@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>PLA3_s6.E: Cercador de dades filtrades amb AJAX.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="index.css">
+</head>
+<body >
+  <div id="selectores">
+    <p>Areas</p>
+    <select id="tblAreas">
+      <option value="0">-- Escoja una area --</option>
+    </select>
+  </div>
+  <div id="cursos">
+    <table>
+      <thead>
+        <tr>
+          <td style="width: 10%">Id</td>
+          <td style="width: 40%">Curso</td>
+          <td style="width: 30%">Area</td>
+          <td style="width: 10%">Duracion</td>
+          <td style="width: 10%">[+ info]</td>
+        </tr>
+      </thead>
+      <tbody id="tblcursos"></tbody>
+    </table>
+  </div>
+  
+  <!-- Small modal -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>-->
+
+ <!-- <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" id="modalcontingut">
+    </div>
+    
+        
+      
+  </div>
+</div>  -->
+
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+       <!--  <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div> 
+<script type="text/javascript">
+
+var xhr;
+if (window.XMLHttpRequest) {
+	xhr = new XMLHttpRequest();
+} else {
+	xhr = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var arrAreas = JSON.parse(xhr.responseText);
+			console.log(arrAreas);
+			for (var i = 0; i < arrAreas.length; i++) {
+				console.log(arrAreas[i].nombre);
+				document.getElementById("tblAreas").innerHTML += '<option id="'+ arrAreas[i].id +'" value="' + arrAreas[i].nombre + '">'+ arrAreas[i].nombre +'</option>';
+	
+			}
+		}
+	}
+	xhr.open('GET', 'tbl_areas.php?nocache='+Math.random(), true);
+	xhr.send();
+	
+	
+	document.getElementById("tblAreas").onchange = function() {
+		
+		document.getElementById("tblcursos").innerHTML = '';
+		var codiarea = document.getElementById("tblAreas").selectedIndex;
+		
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		} else {
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var arrCursos = JSON.parse(xhr.responseText);
+					console.log(arrCursos);
+					for (var i = 0; i < arrCursos.length; i++) {
+						console.log(arrCursos[i]);
+						console.log(arrCursos[i].id);
+						console.log(arrCursos[i].nombre);
+						console.log(arrCursos[i].duracion);
+						
+						//document.getElementById("tblAreas").innerHTML += '<option id="'+ arrAreas[i].id +'" value="' + arrAreas[i].nombre + '">'+ arrAreas[i].nombre +'</option>';
+						var cadena='<tr>'+
+						'<td>'+arrCursos[i].id+'</td>'+
+						'<td>'+arrCursos[i].nombre+'</td>'+
+						'<td>'+arrCursos[i].area+'</td>'+
+						'<td>'+arrCursos[i].duracion+'</td>'+
+						'<td><a href="javascript:void(0)" onclick="getCurs('+arrCursos[i].id+')" data-toggle="modal" data-target=".bd-example-modal-sm">[+info...]</a></td>'+
+						'</tr>';
+						document.getElementById('tblcursos').innerHTML+=cadena;
+						
+						//+arrCursos[i].id+
+						
+					}
+				}
+				
+				
+			}
+			xhr.open('GET', 'tbl_cursos.php?id_areas='+ codiarea +'&nocache=' +Math.random(), true);
+			xhr.send();
+		
+			
+
+			
+	}
+	
+	function getCurs(id){
+		
+		window.sessionStorage.setItem("id_curso",id);
+		var id_areas = document.getElementById("tblAreas").value;
+		xhr.onreadystatechange = function() {
+			var id_curso = window.sessionStorage.getItem("id_curso");
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var arrCursos = JSON.parse(xhr.responseText);
+				console.log(arrCursos);
+				for (var i = 0; i < arrCursos.length; i++) {
+					if(id_curso== arrCursos[i].id){
+						console.log(arrCursos[i]);
+						console.log(arrCursos[i].nombre);
+						//$('#myModal').modal();
+						
+						var cadena='<ul><li><strong>Id:</strong> '+arrCursos[i].id+'</li>'
+						+'<li><strong>Nombre:</strong> '+arrCursos[i].nombre+'</li>'
+						+'<li><strong>objetivos:</strong> '+arrCursos[i].objetivos+'</li>'
+						+'<li><strong>programa:</strong> '+arrCursos[i].programa+'</li>'
+						+'<li><strong>duracion:</strong> '+arrCursos[i].duracion+'</li>'
+						+'<li><strong>area:</strong> '+arrCursos[i].area+'</li>'
+						+'<li><strong>active:</strong> '+arrCursos[i].active+'</li></ul>';
+						document.querySelector("#myModal .modal-body ").innerHTML = cadena;
+						$('#myModal').modal('show');
+					}
+				}
+			}
+		}
+		
+	
+		
+		
+		xhr.open('GET', 'tbl_cursos.php?id_areas='+ id_areas +'&nocache=' +Math.random(), true);
+		xhr.send();
+		//$('#myModal').modal();
+		//console.log(curs);
+	
+	}
+	
+
+	
+</script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
