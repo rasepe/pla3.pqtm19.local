@@ -48,7 +48,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myModalTitle">Modal title</h5>
+        <h5 class="modal-title" id="myModalTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -146,15 +146,15 @@ if (window.XMLHttpRequest) {
 						console.log(arrCursos[i]);
 						console.log(arrCursos[i].nombre);
 						//$('#myModal').modal();
-						
+						var titolmodal = arrCursos[i].nombre;
+						document.getElementById("myModalTitle").innerHTML = titolmodal;
 						var cadena='<ul><li><strong>Id:</strong> '+arrCursos[i].id+'</li>'
-						+'<li><strong>Nombre:</strong> '+arrCursos[i].nombre+'</li>'
 						+'<li><strong>objetivos:</strong> '+arrCursos[i].objetivos+'</li>'
 						+'<li><strong>programa:</strong> '+arrCursos[i].programa+'</li>'
 						+'<li><strong>duracion:</strong> '+arrCursos[i].duracion+'</li>'
 						+'<li><strong>area:</strong> '+arrCursos[i].area+'</li>'
 						+'<li><strong>active:</strong> '+arrCursos[i].active+'</li></ul>';
-						document.querySelector("#myModal .modal-body ").innerHTML = cadena;
+						document.querySelector("#myModal .modal-body").innerHTML = cadena;
 						$('#myModal').modal('show');
 					}
 				}
