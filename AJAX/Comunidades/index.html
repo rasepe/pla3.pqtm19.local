@@ -2,27 +2,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-<table class="table" id="tblComunidades">
-<thead>
-<tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Active</th>
-<th>Editar</th>
-<th>Eliminar</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
+<table class="table" id="tblComunidades" >
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Nombre</th>
+			<th>Active</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
 </table>
+
 <!-- Modal -->
-<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -32,7 +32,7 @@
         </button>
       </div>
       <div class="modal-body">
-       <form id="frmEditar">
+        <form id="frmEditar">
         	<input type="text" name="id" value=""><br>
         	<label>Nombre</label>
         	<input type="text" name="nombre" value=""><br>
@@ -50,61 +50,67 @@
   </div>
 </div>
 
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 <script type="text/javascript">
 	var xhr;
 	
-	
 	if(window.XMLHttpRequest) {
+		// Navegadores que siguen los estándares
 		xhr = new XMLHttpRequest();
-		}
-		else if(window.ActiveXObject) {
+	}else if(window.ActiveXObject) {
+		// Navegadores obsoletos
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-	// --- definir funcio de response ------
+	}
+	// ----------- definir funcio de response ------
 	xhr.onreadystatechange = function(){
-		console.log("readyState: " + xhr.readyState);
-		console.log("status: " + xhr.status);
-		if(xhr.readyState==4 && xhr.status==200) {
-			console.log(xhr.responseText);
+		//console.log("readyState:" + xhr.readyState);
+		//console.log("status:" + xhr.status);
+		if(xhr.readyState==4 && xhr.status==200){
+			//console.log(xhr.responseText);
 			var objComunidades=JSON.parse(xhr.responseText);
-			console.log(objComunidades);
-			for(var i=0; i<objComunidades.records.length;i++){
-				var cadena="<tr>";
-				cadena+="<td>"+objComunidades.records[i].id+"</td>";
-				cadena+="<td>"+objComunidades.records[i].nombre+"</td>";
-				cadena+="<td>"+objComunidades.records[i].active+"</td>";
-				cadena+='<td><button class="btn btn-primary" onclick="editar('+objComunidades.records[i].id+')">Editar</button></td>';
-				cadena+='<td><button class="btn btn-danger" onclick="borrar('+objComunidades.records[i].id+')">Eliminar</button></td>';
-				cadena+="</tr>";
-				document.querySelector("#tblComunidades tbody").innerHTML+=cadena;
+			//console.log(objComunidades);
+			for(var i=0; i<objComunidades.records.length;i++ ){
+			 var cadena="<tr>";
+			 cadena+="<td>"+objComunidades.records[i].id+"</td>";
+			 cadena+="<td>"+objComunidades.records[i].nombre+"</td>";
+			 cadena+="<td>"+objComunidades.records[i].active+"</td>";
+			 cadena+='<td><button class="btn btn-primary" onclick="editar('+objComunidades.records[i].id+')">Editar</button></td>';
+			 cadena+='<td><button class="btn btn-danger" onclick="borrar('+objComunidades.records[i].id+')">Eliminar</button></td>';
+			 cadena+="</tr>";
+			 document.querySelector("#tblComunidades tbody").innerHTML+=cadena;
 			}
 		}
 	}
-	xhr.open('GET','http://app.cifo.local/api/private/cifo/comunidades/', true); // canvia d'estat 0 a 1
-	xhr.setRequestHeader("authorization", "Basic "+ btoa("admin@cifo.cat:12345"));
-	xhr.send(null); //fem la peticio pero sense enviar dades
+	xhr.open('GET','http://app.cifo.local/api/private/cifo/comunidades/',true);
+	xhr.setRequestHeader ("authorization", "Basic "+ btoa("admin@cifo.cat:12345"));
+	xhr.send(null);
 	
-	function editar(id) {
-		if(xhr.readyState==4 && xhr.status==200) {
-			var objComunidad=JSON.parse(xhr.responseText);
-			var objForm = document.getElementById("frmEditar");
-			objForm["id"].value=objComunidad.record.id;
-			objForm["nombre"].value=objComunidad.record.nombre;
-			objForm["active"].value=objComunidad.record.active;
-			
-			$('#editarModal').modal('show')
+	function editar(id){
+		// Crida AJAX /api/private/cifo/comunidades/id 
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4 && xhr.status==200){
+				var objComunidad=JSON.parse(xhr.responseText);
+				
+				var objForm=document.getElementById("frmEditar")
+				objForm["id"].value=objComunidad.record.id;
+				objForm["nombre"].value=objComunidad.record.nombre;
+				objForm["active"].value=objComunidad.record.active;
+				
+				$('#editarModal').modal('show');
+			}
 		}
-		xhr.open('GET','http://app.cifo.local/api/private/cifo/comunidades/'+id, true); // canvia d'estat 0 a 1
-		xhr.setRequestHeader("authorization", "Basic "+ btoa("admin@cifo.cat:12345"));
-		//xhr.setRequestHeader("authorization", "Basic "+ window.sessionStorage.getItem("Auth"); --> si ens autentiquem, més segur
-		xhr.send(null); //fem la peticio pero sense enviar dades
+		xhr.open('GET','http://app.cifo.local/api/private/cifo/comunidades/'+id,true);
+		xhr.setRequestHeader ("authorization", "Basic "+ btoa("admin@cifo.cat:12345"));
+		//xhr.setRequestHeader ("authorization", "Basic "+ window.sessionStorage.getItem("Auth"));
+		xhr.send(null);		
 		
 	}
 	
 </script>
- <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
