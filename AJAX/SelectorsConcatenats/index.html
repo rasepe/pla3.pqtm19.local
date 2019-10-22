@@ -35,7 +35,125 @@
         </div>
   </div>
   <script type="text/javascript">
-  
-  </script>
+
+			var xhr;
+			if (window.XMLHttpRequest) {
+				xhr = new XMLHttpRequest();
+			} else {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						var arrComunidades = JSON.parse(xhr.responseText);
+						console.log(arrComunidades);
+						for (var i = 0; i < arrComunidades.length; i++) {
+							console.log(arrComunidades[i].nombre);
+							document.getElementById("tblComunidades").innerHTML += '<option id="'+ arrComunidades[i].id +'" value="' + arrComunidades[i].nombre + '">'+ arrComunidades[i].nombre +'</option>';
+				
+						}
+					}
+				}
+				xhr.open('GET', 'tbl_comunidades.php?nocache='+Math.random(), true);
+				xhr.send();
+			
+				document.getElementById("tblComunidades").onchange = function() {
+					
+					
+					document.getElementById("tblProvincias").innerHTML = '<option value="">-- Escull una provincia --</option>'
+					
+					var codicomunitat = document.getElementById("tblComunidades").selectedIndex;
+					
+					
+					if (window.XMLHttpRequest) {
+						xhr = new XMLHttpRequest();
+					} else {
+						xhr = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState == 4 && xhr.status == 200) {
+								var arrProvincias = JSON.parse(xhr.responseText);
+								console.log(arrProvincias);
+								for (var i = 0; i < arrProvincias.length; i++) {
+									console.log(arrProvincias[i].nombre);
+									document.getElementById("tblProvincias").innerHTML += '<option id="'+ arrProvincias[i].id +'" value="' + arrProvincias[i].nombre + '">'+ arrProvincias[i].nombre +'</option>';
+								}
+							}
+						}
+						xhr.open('GET', 'tbl_provincias.php?id_comunidades='+ codicomunitat +'&nocache=' +Math.random(), true);
+						xhr.send(); 
+					
+					
+				}
+				
+		document.getElementById("tblProvincias").onchange = function() {
+					
+					
+					document.getElementById("tblMunicipios").innerHTML = '<option value="">-- Escull un municipi --</option>'
+					
+					var provinciaseleccionada = document.getElementById("tblProvincias").selectedIndex;
+					var codiprovincia = document.getElementById("tblProvincias").options[provinciaseleccionada].id;
+					console.log(codiprovincia);
+					
+					if (window.XMLHttpRequest) {
+						xhr = new XMLHttpRequest();
+					} else {
+						xhr = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState == 4 && xhr.status == 200) {
+								var arrMunicipios = JSON.parse(xhr.responseText);
+								console.log(arrMunicipios);
+								for (var i = 0; i < arrMunicipios.length; i++) {
+									console.log(arrMunicipios[i].nombre);
+									document.getElementById("tblMunicipios").innerHTML += '<option id="'+ arrMunicipios[i].id +'" value="' + arrMunicipios[i].nombre + '">'+ arrMunicipios[i].nombre +'</option>';
+								}
+							}
+						}
+						xhr.open('GET', 'tbl_municipios.php?id_provincias='+ codiprovincia +'&nocache=' +Math.random(), true);
+						xhr.send(); 
+					
+					
+				}
+		
+		document.getElementById("tblMunicipios").onchange = function() {
+		
+		var municipiseleccionat = document.getElementById("tblMunicipios").selectedIndex;
+		var codimunicipi = document.getElementById("tblMunicipios").options[municipiseleccionat].id;
+		console.log(codimunicipi);
+		
+		
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		} else {
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var arrMunicipi = JSON.parse(xhr.responseText);
+					console.log(arrMunicipi);
+					console.log(arrMunicipi.poblacion);
+					document.getElementById("poblacion-total").innerHTML=arrMunicipi.poblacion;
+					document.getElementById("poblacion-hombres").innerHTML=arrMunicipi.hombres;
+					document.getElementById("poblacion-mujeres").innerHTML=arrMunicipi.mujeres;
+					/* for (var i = 0; i < arrMunicipios.length; i++) {
+						console.log(arrMunicipios[i].nombre);
+						document.getElementById("tblMunicipios").innerHTML += '<option id="'+ arrMunicipios[i].id +'" value="' + arrMunicipios[i].nombre + '">'+ arrMunicipios[i].nombre +'</option>';
+					} */
+				}
+			}
+			xhr.open('GET', 'poblacion.php?id_municipios='+ codimunicipi +'&nocache=' +Math.random(), true);
+			xhr.send(); 
+		
+		
+	}
+		
+		
+		
+				
+		</script>
 </body>
 </html>
