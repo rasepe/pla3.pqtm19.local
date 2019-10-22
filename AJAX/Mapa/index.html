@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PLA3_s6.B - Google Maps Demo</title>
+<style>
+#map {
+	width: 100%;
+	height: 400px;
+	background-color: grey;
+}
+</style>
+</head>
+<body>
+	<div>
+		<h3>Google Maps Demo</h3>
+		<button id="loadBtn">Cargar marcadores</button>
+		<div id="map"></div>
+	</div>
+	<script type="text/javascript">
+    
+
+
+		var xhr;
+		if (window.XMLHttpRequest) {
+			xhr = new XMLHttpRequest();
+		} else {
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		document.getElementById('loadBtn').onclick = function() {
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var arrPunts = JSON.parse(xhr.responseText);
+					console.log(arrPunts);
+					for (var i = 0; i < arrPunts.length; i++) {
+						
+						var marker = new google.maps.Marker({
+							//console.log(arrPunts[i]);
+							position: {lat: arrPunts[i].latitude, lng: arrPunts[i].longitude},
+							map: map,
+							title: arrPunts[i].description,
+							label: String.fromCharCode(65+i)
+							});
+					}
+				}
+			}
+			xhr.open('GET', 'geo_marcadores.php' + '?nocache='
+					+ Math.random(), true);
+			xhr.send(null);
+		}
+		
+		var map;
+	  	
+	  	function initMap(){
+	         var coorMadrid = {lat: 40.416875, lng: -3.703308};
+	         map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 14,
+	          center: coorMadrid
+	        });
+	  	};
+
+
+	</script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMAUUG6X2nJy8DHsJlmyMv0aS-JDCIDZE&callback=initMap"
+		type="text/javascript"></script>
+</body>
+</html>

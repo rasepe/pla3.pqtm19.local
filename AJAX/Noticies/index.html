@@ -80,10 +80,17 @@
 					"</strong> " +xhr.responseText;
 				}
 			}
+			
+			document.getElementById('ticker').style.backgroundColor = '#FFFF99';
+			setTimeout(function(){
+			document.getElementById('ticker').style.backgroundColor = '#FAFAFA';
+			}, 300);
+
 			xhr.open('GET', 'generaContenidos.php' + '?nocache='
 					+ Math.random(), true);
+			
 			xhr.send(null);
-		}
+			}
 		
 		document.getElementById('detener').onclick=function(){
 			if(document.getElementById('detener').value=="Aturar"){
@@ -123,6 +130,8 @@
 			document.getElementById('ticker').innerHTML = "<strong>" +
 			noticia.hora + "</strong> " + noticia.titular;
 			}
+		
+	
 			
 	</script>
 </body>

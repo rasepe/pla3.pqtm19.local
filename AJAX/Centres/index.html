@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>PLA3_s6.C - Mapa de Centres</title>
+  <style>
+          #map {
+            width: 100%;
+            height: 400px;
+            background-color: grey;
+          }
+  </style>
+  </head>
+  <body>
+    <div>
+      <h3>Mapa centres del CIFO</h3>
+      <button id="loadBtn">Carregar centres</button>
+      <div id="map"></div>
+    </div>
+    <script type="text/javascript">
+	var xhr;
+	if (window.XMLHttpRequest) {
+		xhr = new XMLHttpRequest();
+	} else {
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	document.getElementById('loadBtn').onclick = function() {
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var arrPunts = JSON.parse(xhr.responseText);
+				console.log(arrPunts);
+				for (var i = 0; i < arrPunts.length; i++) {
+					console.log(i.toString());
+					var marker = new google.maps.Marker({
+						position: {lat: parseFloat(arrPunts[i].lat), lng: parseFloat(arrPunts[i].lng)},
+						map: map,
+						title: arrPunts[i].centro,
+						label: i.toString()
+						});
+				}
+			}
+		}
+		xhr.open('GET', 'tbl_centros.php' + '?nocache='
+				+ Math.random(), true);
+		xhr.send(null);
+	}
+    
+    var map;
+    
+    function initMap(){
+         var coorCat = {lat: 41.4167787, lng: 2.1329792};
+         map = new google.maps.Map(document.getElementById('map'), {
+        	 zoom: 8,
+       		 center: coorCat
+        });
+    };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMAUUG6X2nJy8DHsJlmyMv0aS-JDCIDZE&callback=initMap"   type="text/javascript"></script>
+  </body>
+</html>
