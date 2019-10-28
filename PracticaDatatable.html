@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practica Datatables</title>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+	<!-- Datatable CSS -->
+	<!-- <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/> -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+ 
+	<!-- Font Awsome -->
+	<link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col"><button class="btn btn-danger" id="btnDelete">Eliminar</button></div>
+		<div class="col"><button class="btn btn-success" id="btnAdd">Añadir</button></div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-md-4">
+			<div class="card h-100">
+				<div class="card-header">
+					Areas
+				</div>
+				<div class="card-body">
+					<select class="form-control" id="tblAreas">
+						<option value="">-- Elija una opcion --</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-8">
+			<div class="card h-100">
+				<div class="card-header">
+					Cursos
+				</div>
+				<div class="card-body">
+				<div class="table-responsive">
+					<table id="tblCursos" class=" table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Curso</th>
+								<th>Area</th>
+								<th>Duracion</th>
+								<th>[ <i class="fa fa-plus"></i> info]</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"  ></script>
+<!-- Bootstrap -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<!-- Datatable -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+<script>
+var xhr;
+xhr = new XMLHttpRequest();
+
+xhr.onreadystatechange=function(){
+	if(xhr.readyState==4 && xhr.status==200) {
+		var objResponse = JSON.parse(xhr.responseText);
+		if (objResponse.status) {
+			for(var i=0; i<objResponse.records.length; i++) {
+				tabla.row.add({
+					"id"		: objResponse.records[i].id,
+					"curso"	: objResponse.records[i].nombre,
+					"area"		: objResponse.records[i].area,
+					"duracion"		: objResponse.records[i].duracion,
+					"info"		: ""
+				
+				});
+				
+			}
+			tabla.draw();
+		}
+	}
+	
+}
+
+xhr.open('GET', 'http://app.cifo.local/api/public/formacion/cursos/' );
+xhr.send();
+
+var tabla=$('#tblCursos').DataTable({
+	language: {
+        url: '/spanish.datatable.json'
+    },
+    "columnDefs": [
+        { "data": "id"		,	"targets": 0 },
+        { "data": "curso"	,	"targets": 1 },
+        { "data": "area"	,	"targets": 2 },
+        { "data": "duracion",	"targets": 3 },
+        { "data": "info"	,	"targets": 4, "searchable": false, "orderable": false }
+
+      ]
+    
+	
+});
+document.getElementById('btnDelete').onclick=function(){
+	tabla.clear().draw();
+}
+document.getElementById('btnAdd').onclick=function(){
+	tabla.row.add( {
+	    "0":    "Tiger Nixon",
+	    "1":   	"System Architect",
+	    "2":    "$3,120",
+	    "3": 	"2011/04/25",
+	    "4":    "Edinburgh"
+	} ).draw();
+}
+</script>
+</body>
+</html>
