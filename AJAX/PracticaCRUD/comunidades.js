@@ -2,7 +2,7 @@ var email 		= 'admin@cifo.cat';
 var password 	= '12345';
 var cadena		= "Basic "+ btoa(email+":"+password);
 window.sessionStorage.setItem("Authorization",cadena);
-
+var initTime= new Date();
 
 if (window.XMLHttpRequest) { // Mozilla, Safari, ...
 	xhr = new XMLHttpRequest();
@@ -26,13 +26,13 @@ window.onload=function(){
 	    	{"data":"remove"	, "targets":4, "searchable": false, "orderable": false , "className": "text-center"}
 	    ]
 	});
-	$("#modalAjax").modal("show");
+	$("#modalAjax").modal("show"); //spinner
 	getComunidades();
 }
 
 /* ---------------------------------------- getComunidades ------------------------------------------------*/
 function getComunidades(){
-	tabla.clear().draw(false);
+	tabla.clear().draw(false); //elimina i refresca
 
 	xhr.onreadystatechange = function(){
 		if (xhr.readyState == 4 &&  xhr.status == 200 ) {
@@ -71,7 +71,7 @@ function getComunidades(){
 		}
 	}
 	xhr.open('GET','http://app.cifo.local/api/private/cifo/comunidades/',true);
-	xhr.setRequestHeader("authorization", window.sessionStorage.getItem("Authorization"));
+	xhr.setRequestHeader("authorization", window.sessionStorage.getItem("Authorization")); //permet afegir capçalera a la crida
 	xhr.send(null);
 }
 
@@ -111,3 +111,38 @@ function editComunidad(id){
 	xhr.setRequestHeader("authorization", window.sessionStorage.getItem("Authorization"));
 	xhr.send(null);
 }
+
+// ----------------------button#btnSave onclick
+
+document.getElementById('btnSave').onclick=function(){
+	var objForm = document.querySelector('#editModal form');
+	var totOk = true;
+	
+	// validar camps
+	
+	if(totOk){
+		var objComunidad = new Object();
+		objComunidad.id = objForm.id.value;
+		objComunidad.nombre = objForm.nombre.value;
+		objComunidad.active = objForm.active.value;
+		console.log(objComunidad);
+		var jsonComunidad = JSON.stringify(objComunidad);
+		console.log(jsonComunidad);
+	
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState == 4 &&  xhr.status == 200 ) {
+				var objResponse=JSON.parse(xhr.responseText);
+				if(objResponse.status==true) {
+					getComunidades();
+				}
+			}
+		}
+		
+		xhr.open('PUT','http://app.cifo.local/api/private/cifo/comunidades/',true);
+		xhr.setRequestHeader("authorization", window.sessionStorage.getItem("Authorization"));
+		xhr.send(jsonComunidad);
+	}
+	
+	
+}
+
