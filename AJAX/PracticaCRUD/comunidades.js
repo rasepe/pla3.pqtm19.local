@@ -134,6 +134,8 @@ document.getElementById('btnSave').onclick=function(){
 				var objResponse=JSON.parse(xhr.responseText);
 				if(objResponse.status==true) {
 					getComunidades();
+					// $("#modalAjax").modal("show");
+					//$("#editModal").modal("hide");
 				}
 			}
 		}
@@ -145,4 +147,3 @@ document.getElementById('btnSave').onclick=function(){
 	
 	
 }
-
